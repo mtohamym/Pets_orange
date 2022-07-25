@@ -2,25 +2,23 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petology_test/network/dio_helper.dart';
+import 'package:petology_test/pages/home.dart';
 
 import 'login_states.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
-  LoginCubit(LoginStates initialState) : super(initialState);
+  LoginCubit() : super(LoginInitialState());
 
-  Future<dynamic> registerUser(json, String endpoint) async {
-    json = {
-      "email": "tohamy@gmail.com",
-      "password": "01004724510",
-      "firstName": "toha",
-      "lastName": "moha",
-      "phoneNumber": "010047245102",
-      "country": "egymegy"
-    };
-    DioHelper.dio
+  static LoginCubit get(context) => BlocProvider.of(context);
+
+  ///this metho
+  Future<dynamic> loginUser(json, String endpoint,context) async {
+    Response response = DioHelper.dio
         .post(
-      "auth/register",
+      endpoint,
       options: Options(headers: {
         HttpHeaders.contentTypeHeader: "application/json",
       }),
@@ -29,9 +27,17 @@ class LoginCubit extends Cubit<LoginStates> {
         .then((value) {
       if (value.statusCode == 200) {
         print("success");
+        print('Token : ${(value.data['accessToken'])}');
+
+        emit(UserLoginSuccess());
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => Home()));
       } else {
+        emit(UserLoginFailed());
         print("Error");
       }
-    });
+    }) as Response;
   }
 }

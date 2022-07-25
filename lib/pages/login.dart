@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:petology_test/bloc/login/login_cubit.dart';
+import 'package:petology_test/bloc/login/login_states.dart';
+import 'package:petology_test/data/constant.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  List _isHovering = [false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -16,89 +13,151 @@ class _LoginPageState extends State<LoginPage> {
     TextEditingController mailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
-    return Scaffold(
-      appBar: navBar(screenSize),
-      body: SingleChildScrollView(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                margin: EdgeInsets.only(bottom: 50, top: 25),
-                width: 500,
-                child: Stack(
+    return BlocProvider(
+      create: (BuildContext context) => LoginCubit(),
+      child: BlocConsumer<LoginCubit, LoginStates>(
+        listener: (BuildContext context, state) {},
+        builder: (BuildContext context, Object? state) {
+          LoginCubit myCubit = LoginCubit.get(context);
+          return Scaffold(
+            appBar: navBar(screenSize),
+            body: SingleChildScrollView(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.max,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 223),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          border: Border.all(width: 3, color: Colors.black)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Column(
-                          children: [
-                            const Text("Login",
-                                style: TextStyle(
-                                    fontSize: 28, fontWeight: FontWeight.bold)),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            mailTextField(mailController),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            passwordTextField(passwordController),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            logInButton(),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
+                      margin: EdgeInsets.only(bottom: 50, top: 25),
+                      width: 500,
+                      child: Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 223),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                border:
+                                    Border.all(width: 3, color: Colors.black)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Column(
                                 children: [
-                                  Expanded(
-                                    child: Container(
-                                      color: Colors.black,
-                                      height: 1,
-                                    ),
+                                  const Text("Login",
+                                      style: TextStyle(
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.bold)),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  mailTextField(mailController),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  passwordTextField(passwordController),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          if (mailController.text.isNotEmpty &&
+                                              passwordController
+                                                  .text.isNotEmpty) {
+                                            var json = {
+                                              "email": mailController.text
+                                                  .toString(),
+                                              "password": passwordController
+                                                  .text
+                                                  .toString(),
+                                            };
+                                            myCubit.loginUser(
+                                                json, LOGIN_ENDPOINT,context);
+                                          }
+                                        },
+                                        child: Card(
+                                          color: Color(0xff492f24),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(25)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(20.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Text(
+                                                  "Login",
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Colors.white),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 15.0, top: 8),
+                                        child: InkWell(
+                                            child: Text("Forget password ?")),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text("OR"),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      color: Colors.black,
-                                      height: 1,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            color: Colors.black,
+                                            height: 1,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text("OR"),
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            color: Colors.black,
+                                            height: 1,
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  )
+                                  ),
+                                  socialLoginButtons()
                                 ],
                               ),
                             ),
-                            socialLoginButtons()
-                          ],
-                        ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset("LoginDog.png",
+                                  width: 250, height: 250),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset("LoginDog.png", width: 250, height: 250),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              footer(screenSize)
-            ]),
+                    footer(screenSize)
+                  ]),
+            ),
+          );
+        },
       ),
     );
   }
 
   PreferredSize navBar(Size screenSize) {
+    List _isHovering = [false, false, false, false];
     return PreferredSize(
       preferredSize: Size(screenSize.width, 1000),
       child: Container(
@@ -125,11 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     InkWell(
                       onHover: (value) {
-                        setState(() {
-                          value
-                              ? _isHovering[0] = true
-                              : _isHovering[0] = false;
-                        });
+                        value ? _isHovering[0] = true : _isHovering[0] = false;
                       },
                       onTap: () {},
                       child: Column(
@@ -160,11 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(width: screenSize.width / 20),
                     InkWell(
                       onHover: (value) {
-                        setState(() {
-                          value
-                              ? _isHovering[1] = true
-                              : _isHovering[1] = false;
-                        });
+                        value ? _isHovering[1] = true : _isHovering[1] = false;
                       },
                       onTap: () {},
                       child: Column(
@@ -195,11 +246,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(width: screenSize.width / 20),
                     InkWell(
                       onHover: (value) {
-                        setState(() {
-                          value
-                              ? _isHovering[2] = true
-                              : _isHovering[2] = false;
-                        });
+                        value ? _isHovering[2] = true : _isHovering[2] = false;
                       },
                       onTap: () {},
                       child: Column(
@@ -230,11 +277,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(width: screenSize.width / 20),
                     InkWell(
                       onHover: (value) {
-                        setState(() {
-                          value
-                              ? _isHovering[3] = true
-                              : _isHovering[3] = false;
-                        });
+                        value ? _isHovering[3] = true : _isHovering[3] = false;
                       },
                       onTap: () {},
                       child: Column(
@@ -347,39 +390,6 @@ class _LoginPageState extends State<LoginPage> {
             controller: controller,
           ),
         ));
-  }
-
-  Widget logInButton() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        GestureDetector(
-          onTap: () {},
-          child: Card(
-            color: Color(0xff492f24),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    "Login",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 15.0, top: 8),
-          child: InkWell(child: Text("Forget password ?")),
-        )
-      ],
-    );
   }
 
   Widget socialLoginButtons() {

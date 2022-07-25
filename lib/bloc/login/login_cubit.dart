@@ -1,0 +1,37 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
+import 'package:petology_test/network/dio_helper.dart';
+
+import 'login_states.dart';
+
+class LoginCubit extends Cubit<LoginStates> {
+  LoginCubit(LoginStates initialState) : super(initialState);
+
+  Future<dynamic> registerUser(json, String endpoint) async {
+    json = {
+      "email": "tohamy@gmail.com",
+      "password": "01004724510",
+      "firstName": "toha",
+      "lastName": "moha",
+      "phoneNumber": "010047245102",
+      "country": "egymegy"
+    };
+    DioHelper.dio
+        .post(
+      "auth/register",
+      options: Options(headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+      }),
+      data: jsonEncode(json),
+    )
+        .then((value) {
+      if (value.statusCode == 200) {
+        print("success");
+      } else {
+        print("Error");
+      }
+    });
+  }
+}

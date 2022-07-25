@@ -12,7 +12,7 @@ class DioHelper {
     try {
       dio = Dio(
         BaseOptions(
-          baseUrl: 'https://dr-brains.com/api/',
+          baseUrl: 'https://petology.orangedigitalcenteregypt.com/',
           headers: {
             'Accept': 'application/json',
           },

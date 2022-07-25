@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:petology_test/bloc/home/home_cubit.dart';
 import '../data/models/category.dart';
 import '../wedgits/custom_radio.dart';
 
@@ -64,7 +65,10 @@ class _HomePageState extends State<HomePage> {
                                 : _isHovering[0] = false;
                           });
                         },
-                        onTap: () {},
+                        onTap: () {
+
+
+                        },
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -862,5 +866,5 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-  
+
 }

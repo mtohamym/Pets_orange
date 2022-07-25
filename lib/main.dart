@@ -7,5 +7,3 @@ void main() {
   DioHelper.init();
   runApp(Home());
 }
-
-

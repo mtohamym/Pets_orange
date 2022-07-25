@@ -1,8 +1,6 @@
-import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../data/models/category.dart';
 import '../wedgits/custom_radio.dart';
 
@@ -31,11 +29,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     var screenSize = MediaQuery.of(context).size;
     List<Profile> Profiles = [];
-
     Profiles.add(new Profile("Dogs", "ic_cat.png", false));
     Profiles.add(new Profile("Cats", "ic_dog.png", false));
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
@@ -680,7 +679,7 @@ class _HomePageState extends State<HomePage> {
                               fit: BoxFit.cover,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left:8.0),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: Text(
                                 'Tohamydev@gmail.com',
                                 style: TextStyle(
@@ -702,7 +701,7 @@ class _HomePageState extends State<HomePage> {
                               fit: BoxFit.cover,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left:8.0),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: Text(
                                 '(+2)0123456789',
                                 style: TextStyle(
@@ -748,7 +747,7 @@ class _HomePageState extends State<HomePage> {
                               fit: BoxFit.cover,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left:8.0),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: Text(
                                 'Tohamydev@gmail.com',
                                 style: TextStyle(
@@ -770,7 +769,7 @@ class _HomePageState extends State<HomePage> {
                               fit: BoxFit.cover,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left:8.0),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: Text(
                                 '(+2)0123456789',
                                 style: TextStyle(
@@ -816,7 +815,7 @@ class _HomePageState extends State<HomePage> {
                               fit: BoxFit.cover,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left:8.0),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: Text(
                                 'Tohamydev@gmail.com',
                                 style: TextStyle(
@@ -838,7 +837,7 @@ class _HomePageState extends State<HomePage> {
                               fit: BoxFit.cover,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left:8.0),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: Text(
                                 '(+2)0123456789',
                                 style: TextStyle(
@@ -863,4 +862,5 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+  
 }

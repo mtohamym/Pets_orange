@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'category.dart';
+import '../data/models/category.dart';
 
 class CustomRadio extends StatelessWidget {
   Profile _profile;

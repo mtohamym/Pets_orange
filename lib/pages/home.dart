@@ -3,8 +3,8 @@ import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'category.dart';
-import 'custom_radio.dart';
+import '../data/models/category.dart';
+import '../wedgits/custom_radio.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);

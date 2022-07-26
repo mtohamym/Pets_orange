@@ -16,7 +16,6 @@ class HowToPage extends StatelessWidget {
         "How do you feed your dog ? How do you feed your dog ? How do you feed your dog ? How do you feed your dog ? How do you feed your dog ? How do you feed your dog ? How do you feed your dog ? How do you feed your dog ? How do you feed your dog ? How do you feed your dog ?";
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Column(
           children: [

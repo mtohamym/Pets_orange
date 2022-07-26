@@ -20,311 +20,114 @@ class _AdaptionState extends State<Adaption> {
     'Toto',
   ];
 
+  List<Widget> pets = [];
+
   List _isHovering = [false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+    pets = [petCard(), petCard(), petCard(), petCard()];
+
     List<Profile> Profiles = [];
     Profiles.add(new Profile("Dogs", "ic_cat.png", false));
     Profiles.add(new Profile("Cats", "ic_dog.png", false));
 
-    return MaterialApp(
-      home: Scaffold(
-        appBar: navBar(screenSize),
-        body: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(top: 25),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+    return Scaffold(
+      appBar: navBar(screenSize),
+      body: SingleChildScrollView(
+        child: Container(
+          width: screenSize.width,
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  Positioned(
+                    left: 100,
+                    top: 200,
+                    child: Image.asset("doghand.png"),
+                    width: 250,
+                    height: 250,
+                  ),
+                  Positioned(
+                      right: 100,
+                      top: 350,
+                      child: Image.asset("doghand.png"),
+                      width: 250,
+                      height: 250),
+                  Positioned(
+                      top: 500,
+                      child: Image.asset("doghand.png"),
+                      width: 250,
+                      height: 250),
+                  Positioned(
+                      bottom: 50,
+                      left: 100,
+                      child: Image.asset("doghand.png"),
+                      width: 250,
+                      height: 250),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
                       children: [
-                        Text("Breed"),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue;
-                              });
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              filterSection("Breed", screenSize.width / 7),
+                              filterSection("Age", screenSize.width / 7),
+                              filterSection("Size", screenSize.width / 7),
+                              filterSection("Good With", screenSize.width / 7)
+                            ],
                           ),
                         ),
-                        Text("Gender"),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue;
-                              });
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              filterSection("Gender", screenSize.width / 7),
+                              filterSection("Color", screenSize.width / 7),
+                              filterSection(
+                                  "Hair Lenght", screenSize.width / 7),
+                              filterSection(
+                                  "Care & Behavior", screenSize.width / 7)
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Age"),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
+                        Column(children: [
+                          Row(
+                            children: [
+                              petCard(),
+                              petCard(),
+                              petCard(),
+                            ],
                           ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue;
-                              });
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
+                          Row(
+                            children: [
+                              petCard(),
+                              petCard(),
+                              petCard(),
+                            ],
                           ),
-                        ),
-                        Text("Color"),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue;
-                              });
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Size"),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue;
-                              });
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        Text("Hair Length"),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue;
-                              });
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Good With"),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue;
-                              });
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        Text("Care & Behavior"),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue;
-                              });
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 300,
-                      width: 200,
-                      decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                            child: Image.asset("dog.png"),
-                            height: 200,
-                          ),
-                          Text(
-                            "Name",
+                        ]),
+                        InkWell(
+                          child: Text(
+                            "Show More...",
                             style: TextStyle(
+                                color: Colors.brown,
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.brown),
+                                fontWeight: FontWeight.bold),
                           ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                                alignment: Alignment.center,
-                                width: 150,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: Colors.brown,
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                child: Text(
-                                  "Send",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                )),
-                          ),
-                          Text(
-                            "By User",
-                            style: TextStyle(fontSize: 10, color: Colors.black),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 100,
-                ),
-                Text(
-                  "Show More...",
-                  style: TextStyle(
-                      color: Colors.brown,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                CustomFooter()
-              ],
-            ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              CustomFooter()
+            ],
           ),
         ),
       ),
@@ -541,6 +344,90 @@ class _AdaptionState extends State<Adaption> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget petCard() {
+    return Container(
+      height: 300,
+      width: 200,
+      decoration: BoxDecoration(
+          color: Colors.grey, borderRadius: BorderRadius.circular(15)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SizedBox(
+            child: Image.asset("dog.png"),
+            height: 200,
+          ),
+          Text(
+            "Name",
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.brown),
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+                alignment: Alignment.center,
+                width: 150,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Colors.brown,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Text(
+                  "Send",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
+          ),
+          Text(
+            "By User",
+            style: TextStyle(fontSize: 10, color: Colors.black),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget filterSection(String name, double width) {
+    return Container(
+      width: width,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              name,
+              style: TextStyle(fontSize: 18),
+            ),
+            customDropDown()
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget customDropDown() {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      elevation: 5,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        child: DropdownButton(
+          underline: SizedBox(),
+          isExpanded: true,
+          onChanged: (String? newValue) {
+            dropdownvalue = newValue;
+          },
+          items: items.map((items) {
+            return DropdownMenuItem(
+              value: items,
+              child: Text(items),
+            );
+          }).toList(),
         ),
       ),
     );

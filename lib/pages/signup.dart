@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petology_test/bloc/sign_up/sign_up_cubit.dart';
 import 'package:petology_test/bloc/sign_up/sign_up_states.dart';
 import 'package:petology_test/data/constant.dart';
+import 'package:petology_test/wedgits/footer.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
@@ -17,9 +18,7 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery
-        .of(context)
-        .size;
+    Size screenSize = MediaQuery.of(context).size;
 
     return BlocProvider(
       create: (BuildContext context) => SignUpCubit(),
@@ -108,45 +107,51 @@ class SignUp extends StatelessWidget {
                                     ),
                                     Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.center,
+                                          CrossAxisAlignment.center,
                                       children: [
                                         GestureDetector(
                                           onTap: () {
-                                            if (countryController.text
-                                                .isNotEmpty &&
-                                                confirmPassowrdController.text
-                                                    .isNotEmpty &&
-                                                passwordController.text
-                                                    .isNotEmpty &&
-                                                emailController.text
-                                                    .isNotEmpty &&
-                                                secondNameController.text
-                                                    .isNotEmpty &&
-                                                firstNameController.text
-                                                    .isNotEmpty){
-                                            var json = {
+                                            if (countryController
+                                                    .text.isNotEmpty &&
+                                                confirmPassowrdController
+                                                    .text.isNotEmpty &&
+                                                passwordController
+                                                    .text.isNotEmpty &&
+                                                emailController
+                                                    .text.isNotEmpty &&
+                                                secondNameController
+                                                    .text.isNotEmpty &&
+                                                firstNameController
+                                                    .text.isNotEmpty) {
+                                              var json = {
                                                 "email": emailController.text,
-                                                "password": passwordController.text,
-                                                "firstName": firstNameController.text,
-                                                "lastName": secondNameController.text,
-                                                "phoneNumber": confirmPassowrdController.text,
-                                                "country": countryController.text
+                                                "password":
+                                                    passwordController.text,
+                                                "firstName":
+                                                    firstNameController.text,
+                                                "lastName":
+                                                    secondNameController.text,
+                                                "phoneNumber":
+                                                    confirmPassowrdController
+                                                        .text,
+                                                "country":
+                                                    countryController.text
                                               };
-                                              myCubit.registerUser(json,SIGNUP_ENDPOINT,context);
+                                              myCubit.registerUser(json,
+                                                  SIGNUP_ENDPOINT, context);
                                             }
-
                                           },
                                           child: Card(
                                             color: Color(0xff492f24),
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                BorderRadius.circular(25)),
+                                                    BorderRadius.circular(25)),
                                             child: Padding(
                                               padding:
-                                              const EdgeInsets.all(20.0),
+                                                  const EdgeInsets.all(20.0),
                                               child: Row(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                    MainAxisAlignment.center,
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
                                                   Text(
@@ -165,7 +170,7 @@ class SignUp extends StatelessWidget {
                                               right: 15.0, top: 8),
                                           child: Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                                MainAxisAlignment.center,
                                             children: [
                                               Text("Already have an account? "),
                                               InkWell(
@@ -173,7 +178,7 @@ class SignUp extends StatelessWidget {
                                                   "Login",
                                                   style: TextStyle(
                                                       fontWeight:
-                                                      FontWeight.bold),
+                                                          FontWeight.bold),
                                                 ),
                                               )
                                             ],
@@ -202,7 +207,7 @@ class SignUp extends StatelessWidget {
                       ],
                     ),
                   ),
-                  footer(screenSize)
+                  CustomFooter()
                 ],
               ),
             ),
@@ -218,13 +223,13 @@ class SignUp extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromRGBO(103, 71, 57, 1),
-                Color.fromRGBO(24, 7, 1, 1),
-              ],
-            )),
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color.fromRGBO(103, 71, 57, 1),
+            Color.fromRGBO(24, 7, 1, 1),
+          ],
+        )),
         child: Padding(
           padding: EdgeInsets.all(20),
           child: Row(
@@ -249,7 +254,7 @@ class SignUp extends StatelessWidget {
                             'About us',
                             style: TextStyle(
                               color:
-                              _isHovering[0] ? Colors.white : Colors.white,
+                                  _isHovering[0] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -271,7 +276,7 @@ class SignUp extends StatelessWidget {
                     InkWell(
                       onHover: (value) {
                         onHover:
-                            (value) {
+                        (value) {
                           _isHovering[1] = value;
                         };
                       },
@@ -283,7 +288,7 @@ class SignUp extends StatelessWidget {
                             'Categories',
                             style: TextStyle(
                               color:
-                              _isHovering[1] ? Colors.white : Colors.white,
+                                  _isHovering[1] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -305,7 +310,7 @@ class SignUp extends StatelessWidget {
                     InkWell(
                       onHover: (value) {
                         onHover:
-                            (value) {
+                        (value) {
                           _isHovering[2] = value;
                         };
                       },
@@ -317,7 +322,7 @@ class SignUp extends StatelessWidget {
                             'Services',
                             style: TextStyle(
                               color:
-                              _isHovering[2] ? Colors.white : Colors.white,
+                                  _isHovering[2] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -339,7 +344,7 @@ class SignUp extends StatelessWidget {
                     InkWell(
                       onHover: (value) {
                         onHover:
-                            (value) {
+                        (value) {
                           _isHovering[3] = value;
                         };
                       },
@@ -351,7 +356,7 @@ class SignUp extends StatelessWidget {
                             'Request',
                             style: TextStyle(
                               color:
-                              _isHovering[3] ? Colors.white : Colors.white,
+                                  _isHovering[3] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -405,7 +410,7 @@ class SignUp extends StatelessWidget {
                           ),
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
+                                      RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20.0),
                                       side: BorderSide(color: Colors.white))))),
@@ -447,7 +452,7 @@ class SignUp extends StatelessWidget {
           child: Card(
             color: Color(0xff492f24),
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
@@ -546,169 +551,6 @@ class SignUp extends StatelessWidget {
             ),
           )
         ],
-      ),
-    );
-  }
-
-  Widget footer(Size screenSize) {
-    return Container(
-      height: 300,
-      width: screenSize.width,
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color.fromRGBO(103, 71, 57, 1),
-              Color.fromRGBO(24, 7, 1, 1),
-            ],
-          )),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
-                  children: [
-                    Positioned(
-                      right: 10,
-                      child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Image.asset("doghand.png")),
-                    ),
-                    Text(
-                      "For any questions",
-                      style: TextStyle(
-                        color: Color.fromRGBO(255, 227, 197, 1),
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 50),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Image.network(
-                      'https://picsum.photos/seed/337/600',
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.cover,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        'Tohamydev@gmail.com',
-                        style: TextStyle(
-                          color: Color.fromRGBO(255, 227, 197, 1),
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 50),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Image.network(
-                      'https://picsum.photos/seed/337/600',
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.cover,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        '(+2)0123456789',
-                        style: TextStyle(
-                          color: Color.fromRGBO(255, 227, 197, 1),
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
-                  children: [
-                    Positioned(
-                      right: 10,
-                      child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Image.asset("doghand.png")),
-                    ),
-                    Text(
-                      "For any questions",
-                      style: TextStyle(
-                        color: Color.fromRGBO(255, 227, 197, 1),
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 50),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Image.network(
-                      'https://picsum.photos/seed/337/600',
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.cover,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        'Tohamydev@gmail.com',
-                        style: TextStyle(
-                          color: Color.fromRGBO(255, 227, 197, 1),
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 50),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Image.network(
-                      'https://picsum.photos/seed/337/600',
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.cover,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        '(+2)0123456789',
-                        style: TextStyle(
-                          color: Color.fromRGBO(255, 227, 197, 1),
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            Column(
-              children: [Text("Image")],
-            ),
-          ],
-        ),
       ),
     );
   }

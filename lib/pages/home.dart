@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:petology_test/bloc/home/home_cubit.dart';
@@ -27,10 +26,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List _isHovering = [false, false, false, false];
-
+  List pets = [];
+  ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-
     var screenSize = MediaQuery.of(context).size;
     List<Profile> Profiles = [];
     Profiles.add(new Profile("Dogs", "ic_cat.png", false));
@@ -65,10 +64,7 @@ class _HomePageState extends State<HomePage> {
                                 : _isHovering[0] = false;
                           });
                         },
-                        onTap: () {
-
-
-                        },
+                        onTap: () {},
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -562,13 +558,41 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 50),
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [],
+                  Expanded(
+                    child: Container(
+                      width: screenSize.width,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Card(
+                              child: Icon(Icons.arrow_back_ios),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100)),
+                            ),
+                            Expanded(
+                              child: Center(
+                                child: ListView.builder(
+                                  itemCount: 3,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    return Text("Text");
+                                  },
+                                ),
+                              ),
+                            ),
+                            Card(
+                              child: Icon(Icons.arrow_forward_ios),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100)),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
+                  Container(height: 75, child: Card())
                 ],
               ),
             ),
@@ -600,36 +624,6 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   SizedBox(height: 50),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(width: 2),
-                    ),
-                    height: 260,
-                    width: 200,
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          "dog.png",
-                          height: 200,
-                        ),
-                        Text("Pet"),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                              alignment: Alignment.center,
-                              width: 100,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                border:
-                                    Border.all(width: 3, color: Colors.yellow),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Text("Read More")),
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -867,4 +861,35 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget petCard() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(width: 2),
+      ),
+      height: 260,
+      width: 200,
+      child: Column(
+        children: [
+          Image.asset(
+            "dog.png",
+            height: 200,
+          ),
+          Text("Pet"),
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+                alignment: Alignment.center,
+                width: 100,
+                height: 30,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 3, color: Colors.yellow),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Text("Read More")),
+          ),
+        ],
+      ),
+    );
+  }
 }

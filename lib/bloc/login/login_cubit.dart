@@ -4,7 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:petology_test/bloc/home/home_cubit.dart';
 import 'package:petology_test/data/constant.dart';
+import 'package:petology_test/data/models/home_model.dart';
 import 'package:petology_test/network/dio_helper.dart';
 import 'package:petology_test/pages/home.dart';
 

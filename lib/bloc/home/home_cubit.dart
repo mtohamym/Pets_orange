@@ -14,73 +14,87 @@ class HomeCubit extends Cubit<HomeStates> {
   static HomeCubit get(context) => BlocProvider.of(context);
   List<Profile> profiles = [];
   List<PetsNeeds> listOfPets = [];
-  late Footer footerData;
-  late FirstSection firstSectionData;
-  late SecondSection secondSectionData;
+  Footer? footerData;
+  FirstSection? firstSectionData;
+  SecondSection? secondSectionData;
 
-  Future<dynamic> getHomeFirstSectionsData(String endPoint, Context) async {
+  Future<dynamic> getHomeFirstSectionsData(Context) async {
     DioHelper.dio
         .get(
-      "url",
+      FIRST_SECTION_ENDPOINT,
       options: Options(headers: {
         HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.authorizationHeader: TOKEN
       }),
     )
         .then((value) {
       if (value.statusCode == 200) {
+        print("success in first section");
         firstSectionData =
             FirstSection(value.data['title'], value.data['body']);
-      } else {}
-    });
-  }
 
-  Future<dynamic> getHomeSecondSectionsData(String endPoint, Context) async {
-    DioHelper.dio
-        .get(
-      "url",
-      options: Options(headers: {
-        HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.authorizationHeader: TOKEN
-      }),
-    )
-        .then((value) {
-      if (value.statusCode == 200) {
-        secondSectionData =
-            SecondSection(value.data['title'], value.data['body']);
-      } else {}
-    });
-  }
-
-  Future<dynamic> getHomePetsData(String endPoint, Context) async {
-    List? listOfData;
-    DioHelper.dio
-        .get(
-      "url",
-      options: Options(headers: {
-        HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.authorizationHeader: TOKEN
-      }),
-    )
-        .then((value) {
-      if (value.statusCode == 200) {
-        print("Success");
-        listOfData = jsonDecode(value.data);
-        for (int i = 0; i < listOfData!.length; i++) {
-          listOfPets!.add(
-              PetsNeeds(listOfData![i]["imageUrl"], listOfData![i]["title"]));
-        }
+        emit(SectionOneSuccess());
       } else {
-        print("Error");
+        print("error in first section");
+        emit(SectionOneError());
       }
     });
   }
 
-  Future<dynamic> getHomeFooterData(String endPoint, Context) async {
+  Future<dynamic> getHomeSecondSectionsData(Context) async {
+    DioHelper.dio
+        .get(
+      SECOND_SECTION_ENDPOINT,
+      options: Options(headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+      }),
+    )
+        .then((value) {
+      if (value.statusCode == 200) {
+        print("success in second section");
+
+        secondSectionData =
+            SecondSection(value.data['title'], value.data['body']);
+      } else {
+        print("error in second section");
+
+
+      }
+    });
+  }
+
+  Future<dynamic> getHomePetsData(Context) async {
+    var listOfData;
+    DioHelper.dio
+        .get(
+      PETS_NEED_ENDPOINT,
+      options: Options(headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+      }),
+    )
+        .then((value) {
+      if (value.statusCode == 200) {
+        print("Success in pets api");
+        listOfData = PetsNeeds.fromJson(jsonDecode(value.data) as Map<String, dynamic>);
+
+
+        for (int i = 0; i < listOfData!.length; i++) {
+          listOfPets.add(
+              PetsNeeds(listOfData![i]["imageUrl"], listOfData![i]["title"]));
+          print("o");
+        }
+
+
+      } else {
+        print("Error in pets api");
+      }
+    });
+  }
+
+  Future<dynamic> getHomeFooterData(Context) async {
     List? listOfData;
     DioHelper.dio
         .get(
-      "url",
+      Footer_ENDPOINT,
       options: Options(headers: {
         HttpHeaders.contentTypeHeader: "application/json",
         HttpHeaders.authorizationHeader: TOKEN

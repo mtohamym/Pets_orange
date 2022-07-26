@@ -1,8 +1,17 @@
 class FirstSection {
-  String title;
-  String body;
+  String titleFirstSection;
+  String bodyFirstSection;
 
-  FirstSection(this.title, this.body);
+  FirstSection(this.titleFirstSection, this.bodyFirstSection);
+
+  // FirstSection.fromJson(Map<String, dynamic> json){
+  //   titleFirstSection = json[''];
+  //   bodyFirstSection = json[''];
+  // }
+  //
+  // Map<String, dynamic> toJson(){
+  //
+  // }
 }
 
 class SecondSection {
@@ -10,6 +19,7 @@ class SecondSection {
   String body;
   SecondSection(this.title, this.body);
 }
+
 
 class Footer {
   String email;
@@ -21,8 +31,16 @@ class Footer {
 }
 
 class PetsNeeds {
-  String imageUrl;
-  String title;
+  String? imageUrl;
+  String? title;
 
   PetsNeeds(this.imageUrl, this.title);
+
+  PetsNeeds.fromJson(Map<String, dynamic> json){
+    imageUrl = json['imageUrl'];
+    title = json['title'];
+}
+
+
+
 }

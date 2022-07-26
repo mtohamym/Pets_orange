@@ -1,7 +1,8 @@
-
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:petology_test/bloc/home/home_cubit.dart';
+import 'package:petology_test/data/models/home_model.dart';
 import '../data/models/category.dart';
 import '../wedgits/custom_radio.dart';
 
@@ -27,10 +28,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List _isHovering = [false, false, false, false];
+  List pets = [];
 
+  CarouselController carouselController = CarouselController();
+
+  ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-
     var screenSize = MediaQuery.of(context).size;
     List<Profile> Profiles = [];
     Profiles.add(new Profile("Dogs", "ic_cat.png", false));
@@ -65,10 +69,7 @@ class _HomePageState extends State<HomePage> {
                                 : _isHovering[0] = false;
                           });
                         },
-                        onTap: () {
-
-
-                        },
+                        onTap: () {},
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -562,13 +563,52 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 50),
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [],
-                    ),
+                  Expanded(
+                    child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 20),
+                        child: Row(
+                          children: [
+                            Card(
+                              color: Colors.black,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: CarouselSlider.builder(
+                                itemBuilder: (context, index, realIndex) {
+                                  int first = index * 3;
+                                  int second = first + 1;
+                                  int third = second + 1;
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [first, second, third].map((e) {
+                                      return petCard(e);
+                                    }).toList(),
+                                  );
+                                },
+                                itemCount: 3,
+                                options: CarouselOptions(
+                                  autoPlay: false,
+                                  aspectRatio: 3,
+                                ),
+                                carouselController: carouselController,
+                              ),
+                            ),
+                            Card(
+                              child: Icon(Icons.arrow_forward_ios),
+                            ),
+                          ],
+                        )),
                   ),
+                  Container(height: 75, child: Card())
                 ],
               ),
             ),
@@ -600,36 +640,6 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   SizedBox(height: 50),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(width: 2),
-                    ),
-                    height: 260,
-                    width: 200,
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          "dog.png",
-                          height: 200,
-                        ),
-                        Text("Pet"),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                              alignment: Alignment.center,
-                              width: 100,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                border:
-                                    Border.all(width: 3, color: Colors.yellow),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Text("Read More")),
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -867,4 +877,79 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget petCard(int index) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(width: 2),
+        ),
+        height: 260,
+        width: 200,
+        child: Column(
+          children: [
+            Image.asset(
+              "dog.png",
+              height: 200,
+            ),
+            Text("Pet $index"),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                  alignment: Alignment.center,
+                  width: 100,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 3, color: Colors.yellow),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Text("Read More")),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget categoryCard(String categoryName, String imageName) {
+    return SizedBox(
+      height: 200,
+      width: 150,
+      child: Stack(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Image.asset("BrownCircle.png"),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0, bottom: 50),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    imageName,
+                    width: 100,
+                    height: 100,
+                  ),
+                  Expanded(
+                    child: Text(
+                      categoryName,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }

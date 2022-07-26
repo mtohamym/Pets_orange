@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:petology_test/bloc/sign_up/sign_up_cubit.dart';
+import 'package:petology_test/bloc/sign_up/sign_up_states.dart';
+import 'package:petology_test/data/constant.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
@@ -13,151 +17,197 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
+    Size screenSize = MediaQuery
+        .of(context)
+        .size;
 
-    return Scaffold(
-      appBar: navBar(screenSize),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              width: screenSize.width,
-              child: Stack(
+    return BlocProvider(
+      create: (BuildContext context) => SignUpCubit(),
+      child: BlocConsumer<SignUpCubit, SignUpStates>(
+        listener: (BuildContext context, Object? state) {},
+        builder: (BuildContext context, state) {
+          SignUpCubit myCubit = SignUpCubit.get(context);
+
+          return Scaffold(
+            appBar: navBar(screenSize),
+            body: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  Positioned(
-                    child: Image.asset("doghand.png", width: 300, height: 300),
-                    left: 300,
-                    top: 100,
-                  ),
-                  Positioned(
-                    child: Image.asset("doghand.png", width: 300, height: 300),
-                    right: 300,
-                    bottom: 100,
-                  ),
-                  Center(
-                    child: Container(
-                      margin: EdgeInsets.all(50),
-                      width: 500,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all(width: 3, color: Colors.black)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Column(
-                            children: [
-                              const Text("Sign Up",
-                                  style: TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.bold)),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              socialLoginButtons(),
-                              or(),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              customTextField(
-                                  firstNameController, "First Name"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              customTextField(
-                                  secondNameController, "Second Name"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              customTextField(emailController, "Email"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              customTextField(passwordController, "Password"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              customTextField(confirmPassowrdController,
-                                  "Re-Enter Password"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              // drop down menu
-                              customTextField(countryController, "Country"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Card(
-                                      color: Color(0xff492f24),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(25)),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Text(
-                                              "Login",
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                  Container(
+                    width: screenSize.width,
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          child: Image.asset("doghand.png",
+                              width: 300, height: 300),
+                          left: 300,
+                          top: 100,
+                        ),
+                        Positioned(
+                          child: Image.asset("doghand.png",
+                              width: 300, height: 300),
+                          right: 300,
+                          bottom: 100,
+                        ),
+                        Center(
+                          child: Container(
+                            margin: EdgeInsets.all(50),
+                            width: 500,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                      width: 3, color: Colors.black)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(18.0),
+                                child: Column(
+                                  children: [
+                                    const Text("Sign Up",
+                                        style: TextStyle(
+                                            fontSize: 28,
+                                            fontWeight: FontWeight.bold)),
+                                    const SizedBox(
+                                      height: 10,
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 15.0, top: 8),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                    socialLoginButtons(),
+                                    or(),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    customTextField(
+                                        firstNameController, "First Name"),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    customTextField(
+                                        secondNameController, "Second Name"),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    customTextField(emailController, "Email"),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    customTextField(
+                                        passwordController, "Password"),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    customTextField(confirmPassowrdController,
+                                        "Re-Enter Password"),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    // drop down menu
+                                    customTextField(
+                                        countryController, "Country"),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.center,
                                       children: [
-                                        Text("Already have an account? "),
-                                        InkWell(
-                                          child: Text(
-                                            "Login",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
+                                        GestureDetector(
+                                          onTap: () {
+                                            if (countryController.text
+                                                .isNotEmpty &&
+                                                confirmPassowrdController.text
+                                                    .isNotEmpty &&
+                                                passwordController.text
+                                                    .isNotEmpty &&
+                                                emailController.text
+                                                    .isNotEmpty &&
+                                                secondNameController.text
+                                                    .isNotEmpty &&
+                                                firstNameController.text
+                                                    .isNotEmpty){
+                                            var json = {
+                                                "email": emailController.text,
+                                                "password": passwordController.text,
+                                                "firstName": firstNameController.text,
+                                                "lastName": secondNameController.text,
+                                                "phoneNumber": confirmPassowrdController.text,
+                                                "country": countryController.text
+                                              };
+                                              myCubit.registerUser(json,SIGNUP_ENDPOINT,context);
+                                            }
+
+                                          },
+                                          child: Card(
+                                            color: Color(0xff492f24),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(25)),
+                                            child: Padding(
+                                              padding:
+                                              const EdgeInsets.all(20.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Text(
+                                                    "Login",
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.white),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              right: 15.0, top: 8),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                            children: [
+                                              Text("Already have an account? "),
+                                              InkWell(
+                                                child: Text(
+                                                  "Login",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                      FontWeight.bold),
+                                                ),
+                                              )
+                                            ],
                                           ),
                                         )
                                       ],
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        Positioned(
+                          child: Image.asset("dogHand2.png",
+                              width: 75, height: 75),
+                          left: 400,
+                          top: 25,
+                        ),
+                        Positioned(
+                          child: Image.asset("dogHand2.png",
+                              width: 75, height: 75),
+                          right: 400,
+                          bottom: 25,
+                        ),
+                      ],
                     ),
                   ),
-                  Positioned(
-                    child: Image.asset("dogHand2.png", width: 75, height: 75),
-                    left: 400,
-                    top: 25,
-                  ),
-                  Positioned(
-                    child: Image.asset("dogHand2.png", width: 75, height: 75),
-                    right: 400,
-                    bottom: 25,
-                  ),
+                  footer(screenSize)
                 ],
               ),
             ),
-            footer(screenSize)
-          ],
-        ),
+          );
+        },
       ),
     );
   }
@@ -168,13 +218,13 @@ class SignUp extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color.fromRGBO(103, 71, 57, 1),
-            Color.fromRGBO(24, 7, 1, 1),
-          ],
-        )),
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromRGBO(103, 71, 57, 1),
+                Color.fromRGBO(24, 7, 1, 1),
+              ],
+            )),
         child: Padding(
           padding: EdgeInsets.all(20),
           child: Row(
@@ -199,7 +249,7 @@ class SignUp extends StatelessWidget {
                             'About us',
                             style: TextStyle(
                               color:
-                                  _isHovering[0] ? Colors.white : Colors.white,
+                              _isHovering[0] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -221,7 +271,7 @@ class SignUp extends StatelessWidget {
                     InkWell(
                       onHover: (value) {
                         onHover:
-                        (value) {
+                            (value) {
                           _isHovering[1] = value;
                         };
                       },
@@ -233,7 +283,7 @@ class SignUp extends StatelessWidget {
                             'Categories',
                             style: TextStyle(
                               color:
-                                  _isHovering[1] ? Colors.white : Colors.white,
+                              _isHovering[1] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -255,7 +305,7 @@ class SignUp extends StatelessWidget {
                     InkWell(
                       onHover: (value) {
                         onHover:
-                        (value) {
+                            (value) {
                           _isHovering[2] = value;
                         };
                       },
@@ -267,7 +317,7 @@ class SignUp extends StatelessWidget {
                             'Services',
                             style: TextStyle(
                               color:
-                                  _isHovering[2] ? Colors.white : Colors.white,
+                              _isHovering[2] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -289,7 +339,7 @@ class SignUp extends StatelessWidget {
                     InkWell(
                       onHover: (value) {
                         onHover:
-                        (value) {
+                            (value) {
                           _isHovering[3] = value;
                         };
                       },
@@ -301,7 +351,7 @@ class SignUp extends StatelessWidget {
                             'Request',
                             style: TextStyle(
                               color:
-                                  _isHovering[3] ? Colors.white : Colors.white,
+                              _isHovering[3] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -355,7 +405,7 @@ class SignUp extends StatelessWidget {
                           ),
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20.0),
                                       side: BorderSide(color: Colors.white))))),
@@ -397,7 +447,7 @@ class SignUp extends StatelessWidget {
           child: Card(
             color: Color(0xff492f24),
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
@@ -506,13 +556,13 @@ class SignUp extends StatelessWidget {
       width: screenSize.width,
       decoration: const BoxDecoration(
           gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          Color.fromRGBO(103, 71, 57, 1),
-          Color.fromRGBO(24, 7, 1, 1),
-        ],
-      )),
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromRGBO(103, 71, 57, 1),
+              Color.fromRGBO(24, 7, 1, 1),
+            ],
+          )),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(

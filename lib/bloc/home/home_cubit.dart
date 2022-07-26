@@ -9,7 +9,7 @@ import 'package:petology_test/data/models/home_model.dart';
 import 'package:petology_test/network/dio_helper.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
-  HomeCubit(HomeStates initialState) : super(initialState);
+  HomeCubit() : super(AppInitialState());
 
   static HomeCubit get(context) => BlocProvider.of(context);
   List<Profile> profiles = [];
@@ -18,7 +18,7 @@ class HomeCubit extends Cubit<HomeStates> {
   late FirstSection firstSectionData;
   late SecondSection secondSectionData;
 
-  Future<dynamic> getHomeSectionsData(String endPoint, Context) async {
+  Future<dynamic> getHomeFirstSectionsData(String endPoint, Context) async {
     DioHelper.dio
         .get(
       "url",
@@ -31,6 +31,21 @@ class HomeCubit extends Cubit<HomeStates> {
       if (value.statusCode == 200) {
         firstSectionData =
             FirstSection(value.data['title'], value.data['body']);
+      } else {}
+    });
+  }
+
+  Future<dynamic> getHomeSecondSectionsData(String endPoint, Context) async {
+    DioHelper.dio
+        .get(
+      "url",
+      options: Options(headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+        HttpHeaders.authorizationHeader: TOKEN
+      }),
+    )
+        .then((value) {
+      if (value.statusCode == 200) {
         secondSectionData =
             SecondSection(value.data['title'], value.data['body']);
       } else {}

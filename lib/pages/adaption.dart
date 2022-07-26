@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:petology_test/data/models/category.dart';
+import 'package:petology_test/wedgits/footer.dart';
 
 class Adaption extends StatefulWidget {
   const Adaption({Key? key}) : super(key: key);
@@ -10,7 +11,6 @@ class Adaption extends StatefulWidget {
 }
 
 class _AdaptionState extends State<Adaption> {
-
   String? dropdownvalue = '';
 
   var items = [
@@ -24,7 +24,6 @@ class _AdaptionState extends State<Adaption> {
 
   @override
   Widget build(BuildContext context) {
-
     var screenSize = MediaQuery.of(context).size;
     List<Profile> Profiles = [];
     Profiles.add(new Profile("Dogs", "ic_cat.png", false));
@@ -50,8 +49,7 @@ class _AdaptionState extends State<Adaption> {
                           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                           margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
+                            border: Border.all(color: Colors.grey, width: 1),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: DropdownButton(
@@ -59,9 +57,8 @@ class _AdaptionState extends State<Adaption> {
                             isExpanded: true,
                             onChanged: (String? newValue) {
                               setState(() {
-                                dropdownvalue = newValue ;
+                                dropdownvalue = newValue;
                               });
-
                             },
                             items: items.map((items) {
                               return DropdownMenuItem(
@@ -77,8 +74,7 @@ class _AdaptionState extends State<Adaption> {
                           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                           margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
+                            border: Border.all(color: Colors.grey, width: 1),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: DropdownButton(
@@ -86,9 +82,8 @@ class _AdaptionState extends State<Adaption> {
                             isExpanded: true,
                             onChanged: (String? newValue) {
                               setState(() {
-                                dropdownvalue = newValue ;
+                                dropdownvalue = newValue;
                               });
-
                             },
                             items: items.map((items) {
                               return DropdownMenuItem(
@@ -109,8 +104,7 @@ class _AdaptionState extends State<Adaption> {
                           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                           margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
+                            border: Border.all(color: Colors.grey, width: 1),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: DropdownButton(
@@ -118,9 +112,8 @@ class _AdaptionState extends State<Adaption> {
                             isExpanded: true,
                             onChanged: (String? newValue) {
                               setState(() {
-                                dropdownvalue = newValue ;
+                                dropdownvalue = newValue;
                               });
-
                             },
                             items: items.map((items) {
                               return DropdownMenuItem(
@@ -136,8 +129,7 @@ class _AdaptionState extends State<Adaption> {
                           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                           margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
+                            border: Border.all(color: Colors.grey, width: 1),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: DropdownButton(
@@ -145,9 +137,8 @@ class _AdaptionState extends State<Adaption> {
                             isExpanded: true,
                             onChanged: (String? newValue) {
                               setState(() {
-                                dropdownvalue = newValue ;
+                                dropdownvalue = newValue;
                               });
-
                             },
                             items: items.map((items) {
                               return DropdownMenuItem(
@@ -168,8 +159,7 @@ class _AdaptionState extends State<Adaption> {
                           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                           margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
+                            border: Border.all(color: Colors.grey, width: 1),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: DropdownButton(
@@ -177,9 +167,8 @@ class _AdaptionState extends State<Adaption> {
                             isExpanded: true,
                             onChanged: (String? newValue) {
                               setState(() {
-                                dropdownvalue = newValue ;
+                                dropdownvalue = newValue;
                               });
-
                             },
                             items: items.map((items) {
                               return DropdownMenuItem(
@@ -195,8 +184,7 @@ class _AdaptionState extends State<Adaption> {
                           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                           margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
+                            border: Border.all(color: Colors.grey, width: 1),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: DropdownButton(
@@ -204,9 +192,8 @@ class _AdaptionState extends State<Adaption> {
                             isExpanded: true,
                             onChanged: (String? newValue) {
                               setState(() {
-                                dropdownvalue = newValue ;
+                                dropdownvalue = newValue;
                               });
-
                             },
                             items: items.map((items) {
                               return DropdownMenuItem(
@@ -227,8 +214,7 @@ class _AdaptionState extends State<Adaption> {
                           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                           margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
+                            border: Border.all(color: Colors.grey, width: 1),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: DropdownButton(
@@ -236,9 +222,8 @@ class _AdaptionState extends State<Adaption> {
                             isExpanded: true,
                             onChanged: (String? newValue) {
                               setState(() {
-                                dropdownvalue = newValue ;
+                                dropdownvalue = newValue;
                               });
-
                             },
                             items: items.map((items) {
                               return DropdownMenuItem(
@@ -254,8 +239,7 @@ class _AdaptionState extends State<Adaption> {
                           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                           margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
+                            border: Border.all(color: Colors.grey, width: 1),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: DropdownButton(
@@ -263,9 +247,8 @@ class _AdaptionState extends State<Adaption> {
                             isExpanded: true,
                             onChanged: (String? newValue) {
                               setState(() {
-                                dropdownvalue = newValue ;
+                                dropdownvalue = newValue;
                               });
-
                             },
                             items: items.map((items) {
                               return DropdownMenuItem(
@@ -279,43 +262,67 @@ class _AdaptionState extends State<Adaption> {
                     ),
                   ],
                 ),
-              SizedBox(height: 20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 300,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(15)
-                    ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(child: Image.asset("dog.png"),height: 200,),
-                      Text("Name",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.brown),),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                            alignment: Alignment.center,
-                            width: 150,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.brown,
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: Text("Send",style: TextStyle(fontWeight: FontWeight.bold),)),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 300,
+                      width: 200,
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            child: Image.asset("dog.png"),
+                            height: 200,
+                          ),
+                          Text(
+                            "Name",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.brown),
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                                alignment: Alignment.center,
+                                width: 150,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.brown,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                child: Text(
+                                  "Send",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )),
+                          ),
+                          Text(
+                            "By User",
+                            style: TextStyle(fontSize: 10, color: Colors.black),
+                          )
+                        ],
                       ),
-                      Text("By User",style: TextStyle(fontSize: 10,color: Colors.black),)
-                    ],
-                  ),
-                  )
-                ],
-              ),
-             SizedBox(height: 100,),
-             Text("Show More...",style: TextStyle(color: Colors.brown,fontSize: 20,fontWeight: FontWeight.bold),),
-                footer(screenSize)
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 100,
+                ),
+                Text(
+                  "Show More...",
+                  style: TextStyle(
+                      color: Colors.brown,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+                CustomFooter()
               ],
             ),
           ),
@@ -323,19 +330,20 @@ class _AdaptionState extends State<Adaption> {
       ),
     );
   }
+
   PreferredSize navBar(Size screenSize) {
     return PreferredSize(
       preferredSize: Size(screenSize.width, 1000),
       child: Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromRGBO(103, 71, 57, 1),
-                Color.fromRGBO(24, 7, 1, 1),
-              ],
-            )),
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color.fromRGBO(103, 71, 57, 1),
+            Color.fromRGBO(24, 7, 1, 1),
+          ],
+        )),
         child: Padding(
           padding: EdgeInsets.all(20),
           child: Row(
@@ -364,7 +372,7 @@ class _AdaptionState extends State<Adaption> {
                             'About us',
                             style: TextStyle(
                               color:
-                              _isHovering[0] ? Colors.white : Colors.white,
+                                  _isHovering[0] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -399,7 +407,7 @@ class _AdaptionState extends State<Adaption> {
                             'Categories',
                             style: TextStyle(
                               color:
-                              _isHovering[1] ? Colors.white : Colors.white,
+                                  _isHovering[1] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -434,7 +442,7 @@ class _AdaptionState extends State<Adaption> {
                             'Services',
                             style: TextStyle(
                               color:
-                              _isHovering[2] ? Colors.white : Colors.white,
+                                  _isHovering[2] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -469,7 +477,7 @@ class _AdaptionState extends State<Adaption> {
                             'Request',
                             style: TextStyle(
                               color:
-                              _isHovering[3] ? Colors.white : Colors.white,
+                                  _isHovering[3] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -523,7 +531,7 @@ class _AdaptionState extends State<Adaption> {
                           ),
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
+                                      RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20.0),
                                       side: BorderSide(color: Colors.white))))),
@@ -533,168 +541,6 @@ class _AdaptionState extends State<Adaption> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-  Widget footer(Size screenSize) {
-    return Container(
-      height: 300,
-      width: screenSize.width,
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color.fromRGBO(103, 71, 57, 1),
-              Color.fromRGBO(24, 7, 1, 1),
-            ],
-          )),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
-                  children: [
-                    Positioned(
-                      right: 10,
-                      child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Image.asset("doghand.png")),
-                    ),
-                    Text(
-                      "For any questions",
-                      style: TextStyle(
-                        color: Color.fromRGBO(255, 227, 197, 1),
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 50),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Image.network(
-                      'https://picsum.photos/seed/337/600',
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.cover,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        'Tohamydev@gmail.com',
-                        style: TextStyle(
-                          color: Color.fromRGBO(255, 227, 197, 1),
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 50),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Image.network(
-                      'https://picsum.photos/seed/337/600',
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.cover,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        '(+2)0123456789',
-                        style: TextStyle(
-                          color: Color.fromRGBO(255, 227, 197, 1),
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
-                  children: [
-                    Positioned(
-                      right: 10,
-                      child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Image.asset("doghand.png")),
-                    ),
-                    Text(
-                      "For any questions",
-                      style: TextStyle(
-                        color: Color.fromRGBO(255, 227, 197, 1),
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 50),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Image.network(
-                      'https://picsum.photos/seed/337/600',
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.cover,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        'Tohamydev@gmail.com',
-                        style: TextStyle(
-                          color: Color.fromRGBO(255, 227, 197, 1),
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 50),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Image.network(
-                      'https://picsum.photos/seed/337/600',
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.cover,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        '(+2)0123456789',
-                        style: TextStyle(
-                          color: Color.fromRGBO(255, 227, 197, 1),
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            Column(
-              children: [Text("Image")],
-            ),
-          ],
         ),
       ),
     );

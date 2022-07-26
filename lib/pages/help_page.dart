@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:petology_test/data/models/home_model.dart';
 import 'package:petology_test/wedgits/footer.dart';
 
-class RequestPage extends StatelessWidget {
-  RequestPage({Key? key}) : super(key: key);
+class HelpPage extends StatelessWidget {
+  HelpPage({Key? key}) : super(key: key);
+
   String? dropdownvalue = '';
 
-  TextEditingController nameTextController = TextEditingController();
   TextEditingController phoneTextController = TextEditingController();
-  TextEditingController colorTextController = TextEditingController();
   TextEditingController loactionTextController = TextEditingController();
-  TextEditingController descriptionTextController = TextEditingController();
 
   var items = [
     'Pet',
@@ -58,7 +55,7 @@ class RequestPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                              "Request",
+                              "Help your friend",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
@@ -67,47 +64,7 @@ class RequestPage extends StatelessWidget {
                               height: 300,
                               width: 300,
                             ),
-                            customTextField("Name", nameTextController),
                             customDropDown("Category"),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(child: customDropDown("Year")),
-                                Expanded(child: customDropDown("Month")),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(child: customDropDown("Size")),
-                                Expanded(child: customDropDown("Breed")),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(child: customDropDown("Gender")),
-                                Expanded(child: customDropDown("Breed")),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(child: customDropDown("Hair Lenght")),
-                                Expanded(
-                                    child: customDropDown("Care & Behavior")),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                    child: customDropDown("House Trained")),
-                                Expanded(
-                                    child: customTextField(
-                                        "Color", colorTextController)),
-                              ],
-                            ),
                             Padding(
                               padding: const EdgeInsets.only(
                                   left: 15.0, top: 20, bottom: 5),
@@ -123,61 +80,72 @@ class RequestPage extends StatelessWidget {
                                 icon: Icon(Icons.location_on), useIcon: true),
                             customTextField(
                                 "Phone number", phoneTextController),
-                            SizedBox(
-                                height: 100,
-                                child: customTextField(
-                                    "Description", descriptionTextController)),
-                            Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Vaccinated (up to date)"),
-                                  Checkbox(value: false, onChanged: (value) {})
-                                  //Todo: check box
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    width: 400,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      color: Colors.brown,
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Text(
-                                      "Send",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    )),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    width: 400,
-                                    height: 40,
-                                    decoration: BoxDecoration(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () {},
+                                    child: Card(
                                       color: Color(0xff492f24),
-                                      borderRadius: BorderRadius.circular(15),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              "Send",
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                    child: Text(
-                                      "Send",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    )),
-                              ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () {},
+                                    child: Card(
+                                      color: Color(0xffffe3c5),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              "Call",
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.black),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 15.0, top: 8),
+                                  child:
+                                      InkWell(child: Text("Forget password ?")),
+                                )
+                              ],
                             ),
                           ],
                         ),

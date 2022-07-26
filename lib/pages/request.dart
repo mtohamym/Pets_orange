@@ -1,13 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:petology_test/data/models/category.dart';
 
-class Request extends StatefulWidget {
-  @override
-  State<Request> createState() => _RequestState();
-}
-
-class _RequestState extends State<Request> {
+class RequestPage extends StatelessWidget {
+  RequestPage({Key? key}) : super(key: key);
   String? dropdownvalue = '';
 
   TextEditingController nameTextController = TextEditingController();
@@ -206,9 +200,7 @@ class _RequestState extends State<Request> {
             ),
             isExpanded: true,
             onChanged: (String? newValue) {
-              setState(() {
-                dropdownvalue = newValue;
-              });
+              dropdownvalue = newValue;
             },
             items: items.map((items) {
               return DropdownMenuItem(
@@ -249,11 +241,7 @@ class _RequestState extends State<Request> {
                   children: [
                     InkWell(
                       onHover: (value) {
-                        setState(() {
-                          value
-                              ? _isHovering[0] = true
-                              : _isHovering[0] = false;
-                        });
+                        _isHovering[0] = value;
                       },
                       onTap: () {},
                       child: Column(
@@ -284,11 +272,7 @@ class _RequestState extends State<Request> {
                     SizedBox(width: screenSize.width / 20),
                     InkWell(
                       onHover: (value) {
-                        setState(() {
-                          value
-                              ? _isHovering[1] = true
-                              : _isHovering[1] = false;
-                        });
+                        _isHovering[1] = value;
                       },
                       onTap: () {},
                       child: Column(
@@ -319,11 +303,7 @@ class _RequestState extends State<Request> {
                     SizedBox(width: screenSize.width / 20),
                     InkWell(
                       onHover: (value) {
-                        setState(() {
-                          value
-                              ? _isHovering[2] = true
-                              : _isHovering[2] = false;
-                        });
+                        _isHovering[2] = value;
                       },
                       onTap: () {},
                       child: Column(
@@ -354,11 +334,7 @@ class _RequestState extends State<Request> {
                     SizedBox(width: screenSize.width / 20),
                     InkWell(
                       onHover: (value) {
-                        setState(() {
-                          value
-                              ? _isHovering[3] = true
-                              : _isHovering[3] = false;
-                        });
+                        _isHovering[3] = value;
                       },
                       onTap: () {},
                       child: Column(

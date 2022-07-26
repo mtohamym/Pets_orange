@@ -257,7 +257,9 @@ class HomePage extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: ConditionalBuilder(
-                condition: myCubit.firstSectionData != null &&myCubit.secondSectionData != null &&myCubit.footerData != null ,
+                condition: myCubit.firstSectionData != null &&
+                    myCubit.secondSectionData != null &&
+                    myCubit.footerData != null,
                 builder: (context) => Column(
                   children: [
                     Stack(

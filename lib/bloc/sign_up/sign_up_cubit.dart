@@ -1,27 +1,23 @@
 import 'dart:convert';
+import 'dart:html';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petology_test/bloc/sign_up/sign_up_states.dart';
 import 'package:petology_test/network/dio_helper.dart';
+import 'package:petology_test/pages/home.dart';
 
 class SignUpCubit extends Cubit<SignUpStates> {
-  SignUpCubit(SignUpStates initialState) : super(initialState);
+  SignUpCubit() : super(SignUpInitialState());
+  static SignUpCubit get(context) => BlocProvider.of(context);
 
 
-  Future<dynamic> registerUser(json ,String endpoint) async {
-    json = {
-      "email": "tohamy@gmail.com",
-      "password": "01004724510",
-      "firstName": "toha",
-      "lastName": "moha",
-      "phoneNumber": "010047245102",
-      "country": "egymegy"
-    };
+  Future<dynamic> registerUser(json ,String endpoint, context) async {
     DioHelper.dio
-        .post(
-      "auth/register",
+        .post(endpoint,
       options: Options(headers: {
         HttpHeaders.contentTypeHeader: "application/json",
       }),
@@ -30,6 +26,12 @@ class SignUpCubit extends Cubit<SignUpStates> {
         .then((value) {
       if (value.statusCode == 200) {
         print("success");
+        print('Token : ${(value.data['accessToken'])}');
+        emit(UserSigendUpSuccess());
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => Home()));
       } else {
         print("Error");
       }

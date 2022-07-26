@@ -21,12 +21,7 @@ class _RequestState extends State<Request> {
 
   @override
   Widget build(BuildContext context) {
-
     var screenSize = MediaQuery.of(context).size;
-    List<Profile> Profiles = [];
-    Profiles.add(new Profile("Dogs", "ic_cat.png", false));
-    Profiles.add(new Profile("Cats", "ic_dog.png", false));
-
     return MaterialApp(
         home: Scaffold(
           appBar: navBar(screenSize),

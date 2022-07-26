@@ -66,13 +66,15 @@ class LoginPage extends StatelessWidget {
                                                   .text.isNotEmpty) {
                                             var json = {
                                               "email": mailController.text
+                                                  .trim()
                                                   .toString(),
                                               "password": passwordController
                                                   .text
-                                                  .toString(),
+                                                  .toString()
+                                                  .trim(),
                                             };
                                             myCubit.loginUser(
-                                                json, LOGIN_ENDPOINT,context);
+                                                json, LOGIN_ENDPOINT, context);
                                           }
                                         },
                                         child: Card(

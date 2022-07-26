@@ -569,15 +569,17 @@ class _HomePageState extends State<HomePage> {
                             vertical: 20.0, horizontal: 20),
                         child: Row(
                           children: [
-                            Card(
-                              color: Colors.black,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                  Icons.arrow_back,
-                                  color: Colors.white,
+                            InkWell(
+                              child: Card(
+                                color: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(100)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.arrow_back,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
@@ -602,8 +604,19 @@ class _HomePageState extends State<HomePage> {
                                 carouselController: carouselController,
                               ),
                             ),
-                            Card(
-                              child: Icon(Icons.arrow_forward_ios),
+                            InkWell(
+                              child: Card(
+                                color: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(100)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         )),

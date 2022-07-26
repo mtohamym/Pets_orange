@@ -7,7 +7,5 @@ import 'network/dio_helper.dart';
 
 void main() {
   DioHelper.init();
-  runApp(MaterialApp(
-    home: HomePage(),
-  ));
+  runApp(Home());
 }

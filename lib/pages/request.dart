@@ -10,6 +10,12 @@ class Request extends StatefulWidget {
 class _RequestState extends State<Request> {
   String? dropdownvalue = '';
 
+  TextEditingController nameTextController = TextEditingController();
+  TextEditingController phoneTextController = TextEditingController();
+  TextEditingController colorTextController = TextEditingController();
+  TextEditingController loactionTextController = TextEditingController();
+  TextEditingController descriptionTextController = TextEditingController();
+
   var items = [
     'Pet',
     'Dog',
@@ -24,399 +30,211 @@ class _RequestState extends State<Request> {
     var screenSize = MediaQuery.of(context).size;
     return MaterialApp(
         home: Scaffold(
-          appBar: navBar(screenSize),
+      appBar: navBar(screenSize),
       body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                margin: EdgeInsets.all(20),
-                width: 450,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(width: 3, color: Colors.brown),
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Positioned(
+                  child: Image.asset("doghand.png", width: 300, height: 300),
+                  right: 200,
+                  top: 100,
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text("Request",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                    Image.asset(""),
-                    customTextField("Name"),
-                    Container(
-                      width: 400,
-                      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                      margin: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        border:
-                        Border.all(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: DropdownButton(
-                        hint: Text("$dropdownvalue"),
-                        isExpanded: true,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            dropdownvalue = newValue ;
-                          });
-
-                        },
-                        items: items.map((items) {
-                          return DropdownMenuItem(
-                            value: items,
-                            child: Text(items),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue ;
-                              });
-
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue ;
-                              });
-
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue ;
-                              });
-
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue ;
-                              });
-
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue ;
-                              });
-
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue ;
-                              });
-
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue ;
-                              });
-
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue ;
-                              });
-
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue ;
-                              });
-
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        Container(
-                          width: 150,
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                          margin: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButton(
-                            hint: Text("$dropdownvalue"),
-                            isExpanded: true,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue ;
-                              });
-
-                            },
-                            items: items.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "Detect your current location",
-                      textAlign: TextAlign.start,
-                    ),
-                    customTextField("Location"),
-                    customTextField("Phone number"),
-                    SizedBox(height: 100,child: customTextField("Description")),
-                    Text("Vaccinated (up to date)"),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                          alignment: Alignment.center,
-                          width: 400,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.brown,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text("Send",style: TextStyle(fontWeight: FontWeight.bold),)),
-                    ),
-                    SizedBox(height: 10,)
-                  ],
+                Positioned(
+                  child: Image.asset("doghand.png", width: 300, height: 300),
+                  left: 200,
+                  bottom: 100,
                 ),
-              ),
+                Container(
+                  margin: EdgeInsets.all(50),
+                  width: 600,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(width: 3, color: Colors.black),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          "Request",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        Image.asset(
+                          "loginDog.png",
+                          height: 300,
+                          width: 300,
+                        ),
+                        customTextField("Name", nameTextController),
+                        customDropDown("Category"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(child: customDropDown("Year")),
+                            Expanded(child: customDropDown("Month")),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(child: customDropDown("Size")),
+                            Expanded(child: customDropDown("Breed")),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(child: customDropDown("Gender")),
+                            Expanded(child: customDropDown("Breed")),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(child: customDropDown("Hair Lenght")),
+                            Expanded(child: customDropDown("Care & Behavior")),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(child: customDropDown("House Trained")),
+                            Expanded(
+                                child: customTextField(
+                                    "Color", colorTextController)),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 15.0, top: 20, bottom: 5),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Detect your current location",
+                              ),
+                            ],
+                          ),
+                        ),
+                        customTextField("Location", loactionTextController),
+                        customTextField("Phone number", phoneTextController),
+                        SizedBox(
+                            height: 100,
+                            child: customTextField(
+                                "Description", descriptionTextController)),
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Vaccinated (up to date)"),
+                              Checkbox(value: false, onChanged: (value) {})
+                              //Todo: check box
+                            ],
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                              alignment: Alignment.center,
+                              width: 400,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.brown,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Text(
+                                "Send",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              )),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
             footer(screenSize)
-            ],
-          ),
+          ],
         ),
       ),
     ));
   }
 
+  Widget customTextField(String hint, TextEditingController controller) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          elevation: 5,
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: TextField(
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                  hintStyle: TextStyle(fontSize: 13),
+                  hintText: hint,
+                  border: InputBorder.none),
+              controller: controller,
+            ),
+          )),
+    );
+  }
 
-  Widget customTextField(String hint) {
-    return Card(
+  Widget customDropDown(String hint) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 5,
-        color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: TextField(
-            onChanged: (value) {},
-            decoration: InputDecoration(
-                hintStyle: TextStyle(fontSize: 13),
-                hintText: hint,
-                border: InputBorder.none),
-               // controller: controller,
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: DropdownButton(
+            underline: SizedBox(),
+            hint: Text(
+              hint,
+              style: TextStyle(fontSize: 13),
+            ),
+            isExpanded: true,
+            onChanged: (String? newValue) {
+              setState(() {
+                dropdownvalue = newValue;
+              });
+            },
+            items: items.map((items) {
+              return DropdownMenuItem(
+                value: items,
+                child: Text(items),
+              );
+            }).toList(),
           ),
-        ));
+        ),
+      ),
+    );
   }
+
   PreferredSize navBar(Size screenSize) {
     return PreferredSize(
       preferredSize: Size(screenSize.width, 1000),
       child: Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromRGBO(103, 71, 57, 1),
-                Color.fromRGBO(24, 7, 1, 1),
-              ],
-            )),
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color.fromRGBO(103, 71, 57, 1),
+            Color.fromRGBO(24, 7, 1, 1),
+          ],
+        )),
         child: Padding(
           padding: EdgeInsets.all(20),
           child: Row(
@@ -445,7 +263,7 @@ class _RequestState extends State<Request> {
                             'About us',
                             style: TextStyle(
                               color:
-                              _isHovering[0] ? Colors.white : Colors.white,
+                                  _isHovering[0] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -480,7 +298,7 @@ class _RequestState extends State<Request> {
                             'Categories',
                             style: TextStyle(
                               color:
-                              _isHovering[1] ? Colors.white : Colors.white,
+                                  _isHovering[1] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -515,7 +333,7 @@ class _RequestState extends State<Request> {
                             'Services',
                             style: TextStyle(
                               color:
-                              _isHovering[2] ? Colors.white : Colors.white,
+                                  _isHovering[2] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -550,7 +368,7 @@ class _RequestState extends State<Request> {
                             'Request',
                             style: TextStyle(
                               color:
-                              _isHovering[3] ? Colors.white : Colors.white,
+                                  _isHovering[3] ? Colors.white : Colors.white,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -604,7 +422,7 @@ class _RequestState extends State<Request> {
                           ),
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
+                                      RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20.0),
                                       side: BorderSide(color: Colors.white))))),
@@ -618,19 +436,20 @@ class _RequestState extends State<Request> {
       ),
     );
   }
+
   Widget footer(Size screenSize) {
     return Container(
       height: 300,
       width: screenSize.width,
       decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color.fromRGBO(103, 71, 57, 1),
-              Color.fromRGBO(24, 7, 1, 1),
-            ],
-          )),
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Color.fromRGBO(103, 71, 57, 1),
+          Color.fromRGBO(24, 7, 1, 1),
+        ],
+      )),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(

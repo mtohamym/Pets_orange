@@ -15,7 +15,6 @@ class HomeCubit extends Cubit<HomeStates> {
   List<Profile> profiles = [];
   List<PetsNeeds> petsNeedsData = [];
 
-  Footer? footerData;
   FirstSection? firstSectionData;
   SecondSection? secondSectionData;
 
@@ -79,27 +78,6 @@ class HomeCubit extends Cubit<HomeStates> {
       } else {
         print("Error in pets api");
         emit(petsNeedsFaild());
-      }
-    });
-  }
-
-  Future<dynamic> getHomeFooterData(Context) async {
-    List? listOfData;
-    DioHelper.dio
-        .get(
-      Footer_ENDPOINT,
-      options: Options(headers: {
-        HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.authorizationHeader: TOKEN
-      }),
-    )
-        .then((value) {
-      if (value.statusCode == 200) {
-        print("Success in Footer");
-        footerData = Footer(value.data['email'], value.data['location'],
-            value.data['phone'].toString(), value.data['location2']);
-      } else {
-        print("Error in Footer");
       }
     });
   }

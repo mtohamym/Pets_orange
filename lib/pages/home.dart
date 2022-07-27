@@ -44,8 +44,7 @@ class HomePage extends StatelessWidget {
       create: (BuildContext context) => HomeCubit()
         ..getHomeFirstSectionsData(context)
         ..getHomeSecondSectionsData(context)
-        ..getHomePetsData(context)
-        ..getHomeFooterData(context),
+        ..getHomePetsData(context),
       child: BlocConsumer<HomeCubit, HomeStates>(
         listener: (BuildContext context, state) {},
         builder: (BuildContext context, Object? state) {
@@ -55,8 +54,7 @@ class HomePage extends StatelessWidget {
             body: SingleChildScrollView(
               child: ConditionalBuilder(
                 condition: myCubit.firstSectionData != null &&
-                    myCubit.secondSectionData != null &&
-                    myCubit.footerData != null,
+                    myCubit.secondSectionData != null,
                 builder: (context) => Column(
                   children: [
                     SizedBox(
@@ -383,7 +381,7 @@ class HomePage extends StatelessWidget {
                     ),
                     Container(
                       color: Color.fromRGBO(241, 241, 241, 1),
-                      height: 500,
+                      height: 600,
                       width: screenSize.width,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -479,7 +477,41 @@ class HomePage extends StatelessWidget {
                                   ],
                                 )),
                           ),
-                          Container(height: 75, child: Card())
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              color: Color(0xff492f24),
+                              child: SizedBox(
+                                width: 300,
+                                height: 60,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(),
+                                      Text(
+                                        "Show more",
+                                        textAlign: TextAlign.justify,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w100,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),

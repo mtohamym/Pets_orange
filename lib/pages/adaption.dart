@@ -1,4 +1,7 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:ms_widgets/ms_widgets.dart';
 import 'package:petology_test/data/models/category.dart';
 import 'package:petology_test/wedgits/footer.dart';
 import 'package:petology_test/wedgits/nav_bar.dart';
@@ -197,31 +200,68 @@ class AdaptionPage extends StatelessWidget {
               name,
               style: TextStyle(fontSize: 18),
             ),
-            customDropDown()
+            customDropDown(["1", "2"], context, "mapKey")
           ],
         ),
       ),
     );
   }
 
-  Widget customDropDown() {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: DropdownButton(
-          underline: SizedBox(),
-          isExpanded: true,
-          onChanged: (String? newValue) {
-            dropdownvalue = newValue;
-          },
-          items: items.map((items) {
-            return DropdownMenuItem(
-              value: items,
-              child: Text(items),
-            );
-          }).toList(),
+  Widget customDropDown(List<String> items, context, String mapKey) {
+    String? dropDownValue;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: defaultDropDownMenu(
+            onChanged: (String newValue) {
+              dropDownValue = newValue;
+              /*switch(mapKey) {
+                case "categoryId":
+                  RequestCubit.get(context).selections[mapKey] = newValue == "Dog" ? 1 : 2;
+                  break;
+                case "gender":
+                  RequestCubit.get(context).selections[mapKey] = newValue != "Male" ;
+                  break;
+                case "houseTrained":
+                  RequestCubit.get(context).selections[mapKey] = newValue == "True";
+                  break;
+                case "year":
+                  RequestCubit.get(context).selections[mapKey] = int.parse(newValue);
+                  break;
+                case "month":
+                  RequestCubit.get(context).selections[mapKey] = int.parse(newValue);
+                  break;
+                default:
+                  RequestCubit.get(context).selections[mapKey] = dropDownValue;
+              }
+
+              if (hint == "Category") {
+                dropDownValue = newValue;
+                if (newValue == "Dog") {
+                  RequestCubit.get(context)..getDataByCategory("1");
+                } else {
+                  RequestCubit.get(context)..getDataByCategory("2");
+                }
+              } else {
+              }
+                dropDownValue = newValue;
+            */
+            },
+            items: items,
+            selectedItem: dropDownValue,
+            borderRadius: BorderRadius.circular(20),
+            backgroundColor: Colors.white,
+            dropDownColor: Colors.white,
+            borderColor: Colors.transparent,
+            alignment: Alignment.center,
+            itemTextStyle: TextStyle(
+              color: Colors.black,
+            ),
+          ),
         ),
       ),
     );

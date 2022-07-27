@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petology_test/bloc/home/home_cubit.dart';
 import 'package:petology_test/bloc/home/home_states.dart';
+import 'package:petology_test/wedgits/footer.dart';
+import 'package:petology_test/wedgits/nav_bar.dart';
 import '../data/models/category.dart';
 import '../wedgits/custom_radio.dart';
 
@@ -50,211 +52,6 @@ class HomePage extends StatelessWidget {
           HomeCubit myCubit = HomeCubit.get(context);
           return Scaffold(
             extendBodyBehindAppBar: true,
-            appBar: PreferredSize(
-              preferredSize: Size(screenSize.width, 1000),
-              child: Container(
-                color: Color.fromRGBO(0, 0, 0, 0),
-                child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Petology',
-                        style: TextStyle(
-                            fontFamily: "showg",
-                            fontSize: 20,
-                            color: Color.fromRGBO(255, 227, 197, 1)),
-                      ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onHover: (value) {
-                                value
-                                    ? _isHovering[0] = true
-                                    : _isHovering[0] = false;
-                              },
-                              onTap: () {},
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'About us',
-                                    style: TextStyle(
-                                      color: _isHovering[0]
-                                          ? Colors.white
-                                          : Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Visibility(
-                                    maintainAnimation: true,
-                                    maintainState: true,
-                                    maintainSize: true,
-                                    visible: _isHovering[0],
-                                    child: Container(
-                                      height: 2,
-                                      width: 50,
-                                      color: Color.fromRGBO(255, 227, 197, 1),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: screenSize.width / 20),
-                            InkWell(
-                              onHover: (value) {
-                                value
-                                    ? _isHovering[1] = true
-                                    : _isHovering[1] = false;
-                              },
-                              onTap: () {},
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Categories',
-                                    style: TextStyle(
-                                      color: _isHovering[1]
-                                          ? Colors.white
-                                          : Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Visibility(
-                                    maintainAnimation: true,
-                                    maintainState: true,
-                                    maintainSize: true,
-                                    visible: _isHovering[1],
-                                    child: Container(
-                                      height: 2,
-                                      width: 50,
-                                      color: Color.fromRGBO(255, 227, 197, 1),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: screenSize.width / 20),
-                            InkWell(
-                              onHover: (value) {
-                                value
-                                    ? _isHovering[2] = true
-                                    : _isHovering[2] = false;
-                              },
-                              onTap: () {},
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Services',
-                                    style: TextStyle(
-                                      color: _isHovering[2]
-                                          ? Colors.white
-                                          : Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Visibility(
-                                    maintainAnimation: true,
-                                    maintainState: true,
-                                    maintainSize: true,
-                                    visible: _isHovering[2],
-                                    child: Container(
-                                      height: 2,
-                                      width: 50,
-                                      color: Color.fromRGBO(255, 227, 197, 1),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: screenSize.width / 20),
-                            InkWell(
-                              onHover: (value) {
-                                value
-                                    ? _isHovering[3] = true
-                                    : _isHovering[3] = false;
-                              },
-                              onTap: () {},
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Request',
-                                    style: TextStyle(
-                                      color: _isHovering[3]
-                                          ? Colors.white
-                                          : Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Visibility(
-                                    maintainAnimation: true,
-                                    maintainState: true,
-                                    maintainSize: true,
-                                    visible: _isHovering[3],
-                                    child: Container(
-                                      height: 2,
-                                      width: 50,
-                                      color: Color.fromRGBO(255, 227, 197, 1),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: screenSize.width / 5),
-                            Container(
-                              width: 100,
-                              height: 30,
-                              child: TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Sign Up",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              decoration: BoxDecoration(
-                                color: Color.fromRGBO(225, 225, 225, 0.5),
-                                borderRadius: BorderRadius.circular(
-                                  20.0,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: screenSize.width / 50,
-                            ),
-                            Container(
-                              width: 100,
-                              height: 30,
-                              child: TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    "Login",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  style: ButtonStyle(
-                                      shape: MaterialStateProperty.all<
-                                              RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.0),
-                                              side: BorderSide(
-                                                  color: Colors.white))))),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
             body: SingleChildScrollView(
               child: ConditionalBuilder(
                 condition: myCubit.firstSectionData != null &&
@@ -262,117 +59,85 @@ class HomePage extends StatelessWidget {
                     myCubit.footerData != null,
                 builder: (context) => Column(
                   children: [
-                    Stack(
-                      children: [
-                        SizedBox(
-                          height: 700,
-                          width: screenSize.width,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color.fromRGBO(103, 71, 57, 1),
-                                Color.fromRGBO(24, 7, 1, 1),
-                              ],
-                            )),
-                          ),
-                        ),
-                        Row(
+                    SizedBox(
+                      height: screenSize.height,
+                      width: screenSize.width,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color.fromRGBO(103, 71, 57, 1),
+                            Color.fromRGBO(24, 7, 1, 1),
+                          ],
+                        )),
+                        child: Column(
                           children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(100, 150, 0, 0),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    width: 450,
-                                    height: 120,
-                                    child: Text(
-                                      myCubit
-                                          .firstSectionData!.titleFirstSection,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 50,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  SizedBox(
-                                    width: 450,
-                                    height: 350,
-                                    child: Text(
-                                      myCubit
-                                          .firstSectionData!.bodyFirstSection,
-                                      textAlign: TextAlign.justify,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w100,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    width: screenSize.width / 2,
-                                  ),
-                                  Stack(
-                                    alignment: Alignment.bottomCenter,
+                            CustomNavBar(isTransparent: true),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(100, 150, 0, 0),
+                                  child: Column(
                                     children: [
                                       SizedBox(
-                                          width: 700,
-                                          height: 300,
-                                          child: Image.asset("whitepack.png")),
-                                      Positioned(
-                                        bottom: 75,
-                                        child: Container(
-                                          color: Colors.transparent,
-                                          height: 75,
-                                          width: 200,
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            elevation: 10,
-                                            borderRadius:
-                                                BorderRadius.circular(250),
+                                        width: 450,
+                                        height: 120,
+                                        child: Text(
+                                          myCubit.firstSectionData!
+                                              .titleFirstSection,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 50,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            0, 0, 0, 30),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      SizedBox(
+                                        width: 450,
+                                        height: 350,
+                                        child: Text(
+                                          myCubit.firstSectionData!
+                                              .bodyFirstSection,
+                                          textAlign: TextAlign.justify,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w100,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Card(
                                         child: SizedBox(
-                                            width: 500,
-                                            height: 500,
-                                            child: Image.asset("pop.png")),
+                                          width: 300,
+                                          height: 75,
+                                          child: Text(
+                                            myCubit.firstSectionData!
+                                                .bodyFirstSection,
+                                            textAlign: TextAlign.justify,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w100,
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Stack(
-                      children: [
-                        SizedBox(
-                          height: 700,
-                          child: Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Column(
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(100, 0, 0, 0),
+                                  child: Column(
                                     children: [
                                       SizedBox(
                                         width: screenSize.width / 2,
@@ -401,67 +166,115 @@ class HomePage extends StatelessWidget {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(
-                                                0, 0, 0, 50),
+                                                0, 0, 0, 30),
                                             child: SizedBox(
                                                 width: 500,
                                                 height: 500,
-                                                child: Image.asset("dog.png")),
+                                                child: Image.asset("pop.png")),
                                           ),
                                         ],
                                       )
                                     ],
                                   ),
-                                ],
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(100, 150, 0, 0),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      width: 450,
-                                      height: 100,
-                                      child: Text(
-                                        myCubit.secondSectionData!.title,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 50,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Stack(children: [
-                                      Positioned(
-                                        right: 50,
-                                        child: SizedBox(
-                                            width: 350,
-                                            height: 350,
-                                            child: Image.asset("doghand.png")),
-                                      ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 700,
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              Column(
+                                children: [
+                                  SizedBox(
+                                    width: screenSize.width / 2,
+                                  ),
+                                  Stack(
+                                    alignment: Alignment.bottomCenter,
+                                    children: [
                                       SizedBox(
-                                        width: 450,
-                                        height: 350,
-                                        child: Text(
-                                          myCubit.secondSectionData!.body,
-                                          textAlign: TextAlign.justify,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w100,
+                                          width: 700,
+                                          height: 300,
+                                          child: Image.asset("whitepack.png")),
+                                      Positioned(
+                                        bottom: 75,
+                                        child: Container(
+                                          color: Colors.transparent,
+                                          height: 75,
+                                          width: 200,
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            elevation: 10,
+                                            borderRadius:
+                                                BorderRadius.circular(250),
                                           ),
                                         ),
                                       ),
-                                    ]),
-                                  ],
-                                ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 0, 0, 50),
+                                        child: SizedBox(
+                                            width: 500,
+                                            height: 500,
+                                            child: Image.asset("dog.png")),
+                                      ),
+                                    ],
+                                  )
+                                ],
                               ),
                             ],
                           ),
-                        )
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(100, 150, 0, 0),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  width: 450,
+                                  height: 100,
+                                  child: Text(
+                                    myCubit.secondSectionData!.title,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 50,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Stack(children: [
+                                  Positioned(
+                                    right: 50,
+                                    child: SizedBox(
+                                        width: 350,
+                                        height: 350,
+                                        child: Image.asset("doghand.png")),
+                                  ),
+                                  SizedBox(
+                                    width: 450,
+                                    height: 350,
+                                    child: Text(
+                                      myCubit.secondSectionData!.body,
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w100,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Container(
                       color: Colors.white,
@@ -677,240 +490,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container(
-                      height: 300,
-                      width: screenSize.width,
-                      decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color.fromRGBO(103, 71, 57, 1),
-                          Color.fromRGBO(24, 7, 1, 1),
-                        ],
-                      )),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Stack(
-                                  children: [
-                                    Positioned(
-                                      right: 10,
-                                      child: SizedBox(
-                                          width: 50,
-                                          height: 50,
-                                          child: Image.asset("doghand.png")),
-                                    ),
-                                    Text(
-                                      "For any questions",
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(255, 227, 197, 1),
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 50),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Image.network(
-                                      'https://picsum.photos/seed/337/600',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(
-                                        myCubit.footerData!.email,
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 227, 197, 1),
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 50),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Image.network(
-                                      'https://picsum.photos/seed/337/600',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(
-                                        myCubit.footerData!.phone,
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 227, 197, 1),
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Stack(
-                                  children: [
-                                    Positioned(
-                                      right: 10,
-                                      child: SizedBox(
-                                          width: 50,
-                                          height: 50,
-                                          child: Image.asset("doghand.png")),
-                                    ),
-                                    Text(
-                                      "For any questions",
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(255, 227, 197, 1),
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 50),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Image.network(
-                                      'https://picsum.photos/seed/337/600',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(
-                                        myCubit.footerData!.location,
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 227, 197, 1),
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 50),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Image.network(
-                                      'https://picsum.photos/seed/337/600',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(
-                                        myCubit.footerData!.location2,
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 227, 197, 1),
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Stack(
-                                  children: [
-                                    Positioned(
-                                      right: 10,
-                                      child: SizedBox(
-                                          width: 50,
-                                          height: 50,
-                                          child: Image.asset("doghand.png")),
-                                    ),
-                                    Text(
-                                      "For any questions",
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(255, 227, 197, 1),
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 50),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Image.network(
-                                      'https://picsum.photos/seed/337/600',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(
-                                        'Tohamydev@gmail.com',
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 227, 197, 1),
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 50),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Image.network(
-                                      'https://picsum.photos/seed/337/600',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(
-                                        '(+2)0123456789',
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 227, 197, 1),
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                            Column(
-                              children: [Text("Image")],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    CustomFooter()
                   ],
                 ),
                 fallback: (context) => Center(child: Text('No Data')),

@@ -33,6 +33,10 @@ dependencies:
   dio: ^4.0.0
   conditional_builder_null_safety: ^0.0.6
   flutter_bloc: ^7.1.0
+  image_picker: ^0.8.3+3
+  image_picker_web: ^2.1.1
+  ms_widgets: ^0.0.7
+
 
   flutter:
     sdk: flutter

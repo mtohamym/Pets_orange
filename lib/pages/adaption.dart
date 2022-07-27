@@ -29,10 +29,6 @@ class AdaptionPage extends StatelessWidget {
       petCard(),
     ];
 
-    List<Profile> Profiles = [];
-    Profiles.add(new Profile("Dogs", "ic_cat.png", false));
-    Profiles.add(new Profile("Cats", "ic_dog.png", false));
-
     return Scaffold(
       appBar: navBar(screenSize),
       body: SingleChildScrollView(

@@ -1,4 +1,9 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ms_widgets/ms_widgets.dart';
+import 'package:petology_test/bloc/request/request_cubit.dart';
+import 'package:petology_test/bloc/request/request_states.dart';
 import 'package:petology_test/data/models/home_model.dart';
 import 'package:petology_test/wedgits/footer.dart';
 
@@ -12,186 +17,342 @@ class RequestPage extends StatelessWidget {
   TextEditingController loactionTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
 
-  var items = [
-    'Pet',
-    'Dog',
-    'Cat',
-    'Toto',
-  ];
-
   List _isHovering = [false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return MaterialApp(
-        home: Scaffold(
-      appBar: navBar(screenSize),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              width: screenSize.width,
-              child: Stack(
-                children: [
-                  Positioned(
-                    child: Image.asset("doghand.png", width: 300, height: 300),
-                    right: 200,
-                    top: 100,
-                  ),
-                  Positioned(
-                    child: Image.asset("doghand.png", width: 300, height: 300),
-                    left: 200,
-                    bottom: 100,
-                  ),
-                  Center(
-                    child: Container(
-                      margin: EdgeInsets.all(50),
-                      width: 600,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(width: 3, color: Colors.black),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "Request",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            Image.asset(
-                              "loginDog.png",
-                              height: 300,
-                              width: 300,
-                            ),
-                            customTextField("Name", nameTextController),
-                            customDropDown("Category"),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(child: customDropDown("Year")),
-                                Expanded(child: customDropDown("Month")),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(child: customDropDown("Size")),
-                                Expanded(child: customDropDown("Breed")),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(child: customDropDown("Gender")),
-                                Expanded(child: customDropDown("Breed")),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(child: customDropDown("Hair Lenght")),
-                                Expanded(
-                                    child: customDropDown("Care & Behavior")),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                    child: customDropDown("House Trained")),
-                                Expanded(
-                                    child: customTextField(
-                                        "Color", colorTextController)),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 15.0, top: 20, bottom: 5),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Detect your current location",
-                                  ),
-                                ],
+    return BlocProvider(
+      create: (BuildContext context) => RequestCubit(),
+      child: BlocConsumer<RequestCubit, RequestStates>(
+          listener: (BuildContext context, state) {},
+          builder: (BuildContext context, Object? state) {
+            RequestCubit myCubit = RequestCubit.get(context);
+
+            return MaterialApp(
+                home: Scaffold(
+              appBar: navBar(screenSize),
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: screenSize.width,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            child: Image.asset("doghand.png",
+                                width: 300, height: 300),
+                            right: 200,
+                            top: 100,
+                          ),
+                          Positioned(
+                            child: Image.asset("doghand.png",
+                                width: 300, height: 300),
+                            left: 200,
+                            bottom: 100,
+                          ),
+                          Center(
+                            child: Container(
+                              margin: EdgeInsets.all(50),
+                              width: 600,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                                border:
+                                    Border.all(width: 3, color: Colors.black),
                               ),
-                            ),
-                            customTextField("Location", loactionTextController,
-                                icon: Icon(Icons.location_on), useIcon: true),
-                            customTextField(
-                                "Phone number", phoneTextController),
-                            SizedBox(
-                                height: 100,
-                                child: customTextField(
-                                    "Description", descriptionTextController)),
-                            Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Vaccinated (up to date)"),
-                                  Checkbox(value: false, onChanged: (value) {})
-                                  //Todo: check box
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    width: 400,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      color: Colors.brown,
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Text(
-                                      "Send",
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      "Request",
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    )),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    width: 400,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xff492f24),
-                                      borderRadius: BorderRadius.circular(15),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                    child: Text(
-                                      "Send",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    )),
+                                    InkWell(
+                                      onTap: () {
+                                        myCubit.pickImage();
+                                      },
+                                      child: myCubit.base64string == null
+                                          ? Image.asset(
+                                              "loginDog.png",
+                                              height: 300,
+                                              width: 300,
+                                            )
+                                          : Image.memory(
+                                              myCubit.bytesFromPicker!,
+                                              height: 300,
+                                              width: 300,
+                                            ),
+                                    ),
+                                    customTextField("Name", nameTextController),
+                                    customDropDown("Category",
+                                        myCubit.categoryDropItems, context),
+                                    ConditionalBuilder(
+                                      condition: myCubit.filtersData != null,
+                                      fallback: (BuildContext context) {
+                                        return Text("Choose Category to Fill");
+                                      },
+                                      builder: (BuildContext context) {
+                                        return Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                    child: customDropDown(
+                                                        "Year",
+                                                        myCubit
+                                                            .categoryDropItems,
+                                                        context)),
+                                                Expanded(
+                                                    child: customDropDown(
+                                                        "Month",
+                                                        myCubit
+                                                            .categoryDropItems,
+                                                        context)),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                    child: customDropDown(
+                                                        "Size",
+                                                        myCubit.genderDropItems,
+                                                        context)),
+                                                Expanded(
+                                                    child: customDropDown(
+                                                        "Breed",
+                                                        myCubit.genderDropItems,
+                                                        context)),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                    child: customDropDown(
+                                                        "Gender",
+                                                        myCubit.genderDropItems,
+                                                        context)),
+                                                Expanded(
+                                                    child: customDropDown(
+                                                        "Breed",
+                                                        myCubit
+                                                            .categoryDropItems,
+                                                        context)),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                    child: customDropDown(
+                                                        "Hair Lenght",
+                                                        myCubit.genderDropItems,
+                                                        context)),
+                                                Expanded(
+                                                    child: customDropDown(
+                                                        "Care & Behavior",
+                                                        myCubit.genderDropItems,
+                                                        context)),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                    child: customDropDown(
+                                                        "House Trained",
+                                                        myCubit.genderDropItems,
+                                                        context)),
+                                                Expanded(
+                                                    child: customDropDown(
+                                                        "Color",
+                                                        myCubit.genderDropItems,
+                                                        context)),
+                                              ],
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 15.0,
+                                                  top: 20,
+                                                  bottom: 5),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Detect your current location",
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            customTextField("Location",
+                                                loactionTextController,
+                                                icon: Icon(Icons.location_on),
+                                                useIcon: true),
+                                            customTextField("Phone number",
+                                                phoneTextController),
+                                            SizedBox(
+                                                height: 100,
+                                                child: customTextField(
+                                                    "Description",
+                                                    descriptionTextController)),
+                                            Padding(
+                                              padding: const EdgeInsets.all(15),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                      "Vaccinated (up to date)"),
+                                                  Checkbox(
+                                                      value: false,
+                                                      onChanged: (value) {})
+                                                  //Todo: check box
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: GestureDetector(
+                                                onTap: () {},
+                                                child: Container(
+                                                    alignment: Alignment.center,
+                                                    width: 400,
+                                                    height: 40,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.brown,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                    ),
+                                                    child: Text(
+                                                      "Send",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.white),
+                                                    )),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: GestureDetector(
+                                                onTap: () {},
+                                                child: Container(
+                                                    alignment: Alignment.center,
+                                                    width: 400,
+                                                    height: 40,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0xff492f24),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                    ),
+                                                    child: Text(
+                                                      "Send",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.white),
+                                                    )),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                    CustomFooter()
+                  ],
+                ),
               ),
+            ));
+          }),
+    );
+  }
+  //
+  // Widget customDropDown(String hint,List<String> items, context) {
+  //   return Container(
+  //     width: 300,
+  //     height: 30,
+  //     child: defaultDropDownMenu(
+  //
+  //       items: items,
+  //       selectedItem: dropdownvalue,
+  //       borderRadius: BorderRadius.circular(20),
+  //       backgroundColor: Colors.white,
+  //       dropDownColor: Colors.white,
+  //       borderColor: Colors.transparent,
+  //       labelText: hint,
+  //       alignment: Alignment.center,
+  //       itemTextStyle: TextStyle(
+  //         color: Colors.black,
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  Widget customDropDown(String hint,List<String> items, context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: DropdownButton(
+
+            value: items[0],
+            underline: SizedBox(),
+            hint: Text(
+              hint,
+              style: TextStyle(fontSize: 13),
             ),
-            CustomFooter()
-          ],
+            isExpanded: true,
+            onChanged: (String? newValue) {
+              dropdownvalue = newValue;
+              if (hint == "Category") {
+                hint = newValue!;
+                if (newValue == "Dog") {
+                  RequestCubit.get(context)..getDataByCategory("1");
+                } else {
+                  RequestCubit.get(context)..getDataByCategory("2");
+                }
+              }else {
+                hint = newValue!;
+              }
+
+            },
+            items: items!,
+          ),
         ),
       ),
-    ));
+    );
   }
 
   Widget customTextField(String hint, TextEditingController controller,
@@ -215,36 +376,6 @@ class RequestPage extends StatelessWidget {
               controller: controller,
             ),
           )),
-    );
-  }
-
-  Widget customDropDown(String hint) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        elevation: 5,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: DropdownButton(
-            underline: SizedBox(),
-            hint: Text(
-              hint,
-              style: TextStyle(fontSize: 13),
-            ),
-            isExpanded: true,
-            onChanged: (String? newValue) {
-              dropdownvalue = newValue;
-            },
-            items: items.map((items) {
-              return DropdownMenuItem(
-                value: items,
-                child: Text(items),
-              );
-            }).toList(),
-          ),
-        ),
-      ),
     );
   }
 

@@ -114,8 +114,10 @@ class RequestCubit extends Cubit<RequestStates> {
   Future<void> pickImage() async {
     bytesFromPicker = (await ImagePickerWeb.getMultiImagesAsBytes());
     for (int i = 0; i < bytesFromPicker!.length; i++) {
-      base64string.add(base64.encode(bytesFromPicker![i]));
+      base64string.add('data:image/png;base64,'+base64.encode(bytesFromPicker![i]));
     }
+
+    print(bytesFromPicker![0].toString().substring(0 , 40));
     emit(ImageLoaded());
   }
 
@@ -129,8 +131,13 @@ class RequestCubit extends Cubit<RequestStates> {
     selections['location'] = location;
     selections['description'] = description;
     selections['image'] = base64string;
+    print(TOKEN);
+    Map<String , Map> data = {
+      "pet" : selections
+    };
 
-    String dataJason = jsonEncode(selections);
+    String dataJason = jsonEncode(data);
+
     print(dataJason);
     DioHelper.dio
         .post(
@@ -138,7 +145,8 @@ class RequestCubit extends Cubit<RequestStates> {
       data: dataJason,
       options: Options(headers: {
         HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.authorizationHeader: TOKEN
+        'Authorization': 'Bearer $TOKEN'
+
       }),
     )
         .then((value) {

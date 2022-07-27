@@ -18,7 +18,7 @@ class RequestPage extends StatelessWidget {
   TextEditingController locationTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
 
-  List<String> items = ["item1", "item2"];
+
 
   @override
   Widget build(BuildContext context) {

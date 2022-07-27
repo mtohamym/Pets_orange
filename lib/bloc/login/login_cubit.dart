@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petology_test/data/constant.dart';
 import 'package:petology_test/network/dio_helper.dart';
+import 'package:petology_test/pages/adaption.dart';
 import 'package:petology_test/pages/help_page.dart';
 import 'package:petology_test/pages/home.dart';
 import 'package:petology_test/pages/request.dart';
@@ -35,7 +36,7 @@ class LoginCubit extends Cubit<LoginStates> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => HelpPage()));
+                builder: (BuildContext context) => AdaptionPage("1")));
       } else {
         emit(UserLoginFailed());
         print("Error");

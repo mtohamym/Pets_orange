@@ -13,11 +13,10 @@ import '../data/models/pet.dart';
 
 class AdaptionPage extends StatelessWidget {
   String categoryId = "";
-  AdaptionPage( this.categoryId, {Key? key}) : super(key: key);
-  Map<String, dynamic> selections = {};
+
+  AdaptionPage(this.categoryId, {Key? key}) : super(key: key);
 
   String? dropdownvalue = '';
-
 
   List _isHovering = [false, false, false, false];
 
@@ -25,10 +24,11 @@ class AdaptionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
 
-
     return BlocProvider(
       lazy: false,
-      create: (BuildContext context) => AdaptionCubit()..getFiltersByCategory(categoryId)..getPetsData(categoryId),
+      create: (BuildContext context) => AdaptionCubit()
+        ..getFiltersByCategory(categoryId)
+        ..getPetsData(categoryId),
       child: BlocConsumer<AdaptionCubit, AdaptionStates>(
           listener: (BuildContext context, state) {},
           builder: (BuildContext context, Object? state) {
@@ -108,23 +108,29 @@ class AdaptionPage extends StatelessWidget {
                                     child: ListView.builder(
                                       shrinkWrap: true,
                                       scrollDirection: Axis.horizontal,
-                                      itemCount:
-                                      myCubit.listOfData.length >= 3 ? 3 : myCubit.listOfData.length,
+                                      itemCount: myCubit.listOfData.length >= 3
+                                          ? 3
+                                          : myCubit.listOfData.length,
                                       itemBuilder: (context, index) {
-                                        return petCard(myCubit.listOfData[index]);
+                                        return petCard(
+                                            myCubit.listOfData[index]);
                                       },
                                     ),
                                   ),
                                   Container(
-                                    height: myCubit.listOfData.length - 3 > 0 ? 450 : 0,
+                                    height: myCubit.listOfData.length - 3 > 0
+                                        ? 450
+                                        : 0,
                                     child: ListView.builder(
                                       shrinkWrap: true,
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: myCubit.listOfData.length - 3 > 0
-                                          ? myCubit.listOfData.length - 3
-                                          : 0,
+                                      itemCount:
+                                          myCubit.listOfData.length - 3 > 0
+                                              ? myCubit.listOfData.length - 3
+                                              : 0,
                                       itemBuilder: (context, index) {
-                                        return petCard(myCubit.listOfData[index]);
+                                        return petCard(
+                                            myCubit.listOfData[index]);
                                       },
                                     ),
                                   ),
@@ -166,7 +172,8 @@ class AdaptionPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SizedBox(
-            child: Image.memory(Base64Decoder().convert(pet.image![0].toString().substring(22))),
+            child: Image.memory(Base64Decoder()
+                .convert(pet.image![0].toString().substring(22))),
             height: 200,
           ),
           Text(
@@ -212,14 +219,14 @@ class AdaptionPage extends StatelessWidget {
               name,
               style: TextStyle(fontSize: 18),
             ),
-            customDropDown(["1", "2"], context, "mapKey")
+            customDropDown(["1", "2"], context, "mapKey" , categoryId)
           ],
         ),
       ),
     );
   }
 
-  Widget customDropDown(List<String> items, context, String mapKey) {
+  Widget customDropDown(List<String> items, context, String mapKey, String categoryId) {
     String? dropDownValue;
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -231,37 +238,11 @@ class AdaptionPage extends StatelessWidget {
           child: defaultDropDownMenu(
             onChanged: (String newValue) {
               dropDownValue = newValue;
-              /*switch(mapKey) {
-                case "categoryId":
-                  RequestCubit.get(context).selections[mapKey] = newValue == "Dog" ? 1 : 2;
-                  break;
-                case "gender":
-                  RequestCubit.get(context).selections[mapKey] = newValue != "Male" ;
-                  break;
-                case "houseTrained":
-                  RequestCubit.get(context).selections[mapKey] = newValue == "True";
-                  break;
-                case "year":
-                  RequestCubit.get(context).selections[mapKey] = int.parse(newValue);
-                  break;
-                case "month":
-                  RequestCubit.get(context).selections[mapKey] = int.parse(newValue);
-                  break;
-                default:
-                  RequestCubit.get(context).selections[mapKey] = dropDownValue;
-              }
+              AdaptionCubit.get(context).selections[mapKey] = "newValue";
+              AdaptionCubit.get(context)..getPetsData(categoryId);
 
-              if (hint == "Category") {
-                dropDownValue = newValue;
-                if (newValue == "Dog") {
-                  RequestCubit.get(context)..getDataByCategory("1");
-                } else {
-                  RequestCubit.get(context)..getDataByCategory("2");
-                }
-              } else {
-              }
-                dropDownValue = newValue;
-            */
+
+
             },
             items: items,
             selectedItem: dropDownValue,

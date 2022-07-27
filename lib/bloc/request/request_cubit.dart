@@ -15,10 +15,6 @@ import 'package:petology_test/network/dio_helper.dart';
 class RequestCubit extends Cubit<RequestStates> {
   RequestCubit() : super(RequestInitialState());
 
-  // List categoryDropItems = [
-  //   'Dog',
-  //   'Cat',
-  // ];
   bool? isVaccinated = false;
 
   Map<String, dynamic> selections = {
@@ -40,48 +36,17 @@ class RequestCubit extends Cubit<RequestStates> {
     'categoryId': 0,
   };
 
-  // String? breedSelect;
-  // String? agesSelect;
-  // String? sizeSelect;
-  // String? genderSelect;
-  // String? hairLengthSelect;
-  // String? behaviourSelect;
-  // String? colorDropSelect;
+
 
   List<String> base64string = [];
   List<Uint8List>? bytesFromPicker;
 
-  // void selectDrop(String filterName, String newValue) {
-  //   if (filterName == "breed") {
-  //     breedSelect = newValue;
-  //   } else if (filterName == "ages") {
-  //     agesSelect = newValue;
-  //   } else if (filterName == "size") {
-  //     sizeSelect = newValue;
-  //   } else if (filterName == "gender") {
-  //     genderSelect = newValue;
-  //   } else if (filterName == "colors") {
-  //     colorDropSelect = newValue;
-  //   } else if (filterName == "hairLength") {
-  //     hairLengthSelect = newValue;
-  //   } else if (filterName == "behaviour") {
-  //     behaviourSelect = newValue;
-  //   }
-  //   emit(SelectDropValue());
-  // }
 
   var categoryDropItems = ["Dog", "Cat"];
 
-  // List<DropdownMenuItem<String>> categoryDropItems = [
-  //   DropdownMenuItem(child: Text("Dog"), value: "1"),
-  //   DropdownMenuItem(child: Text("Cat"), value: "2"),
-  // ];
   List<String> genderDropItems = ["Male", "Female"];
 
-  // List<DropdownMenuItem<String>> genderDropItems = [
-  //   DropdownMenuItem(child: Text("male"), value: "0"),
-  //   DropdownMenuItem(child: Text("female"), value: "1"),
-  // ];
+
 
   void checkVaccine() {
     isVaccinated = !isVaccinated!;

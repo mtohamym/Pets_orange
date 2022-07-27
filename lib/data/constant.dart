@@ -7,3 +7,6 @@ String PETS_NEED_ENDPOINT ="static/homepage/pet-needs";
 String Footer_ENDPOINT ="static/homepage/footer";
 String CATEGORY_FILTERS_ENDPOINT ="/pets/filters/";
 String PET_REQUEST_ENDPOINT ="pets";
+String HELP_PET_REQUEST_ENDPOINT ="pets/request";
+
+

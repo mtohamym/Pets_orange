@@ -10,15 +10,14 @@ import 'package:petology_test/wedgits/nav_bar.dart';
 
 class RequestPage extends StatelessWidget {
   RequestPage({Key? key}) : super(key: key);
-  String? dropdownvalue;
+
 
   TextEditingController nameTextController = TextEditingController();
   TextEditingController phoneTextController = TextEditingController();
   TextEditingController colorTextController = TextEditingController();
-  TextEditingController loactionTextController = TextEditingController();
+  TextEditingController locationTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
 
-  List _isHovering = [false, false, false, false];
   List<String> items = ["item1", "item2"];
 
   @override
@@ -78,14 +77,14 @@ class RequestPage extends StatelessWidget {
                                       onTap: () {
                                         myCubit.pickImage();
                                       },
-                                      child: myCubit.base64string == null
+                                      child: myCubit.base64string.isEmpty
                                           ? Image.asset(
                                               "cam.png",
                                               height: 300,
                                               width: 300,
                                             )
                                           : Image.memory(
-                                              myCubit.bytesFromPicker!,
+                                              myCubit.bytesFromPicker![2],
                                               height: 300,
                                               width: 300,
                                             ),
@@ -94,13 +93,23 @@ class RequestPage extends StatelessWidget {
                                     //TODO Dropdown
 
                                     customDropDown("Category",
-                                        myCubit.categoryDropItems, context),
+                                        myCubit.categoryDropItems, context , "categoryId"),
                                     ConditionalBuilder(
                                       condition: myCubit.filtersData != null,
                                       fallback: (BuildContext context) {
                                         return Text("Choose Category to Fill");
                                       },
                                       builder: (BuildContext context) {
+                                        List<String> years = [];
+                                        List<String> months = [];
+
+                                        for(int i = 1 ; i < 12 ; i ++){
+                                          months.add("$i");
+                                        }
+                                        for(int i = 0; i < 16 ; i ++){
+                                          years.add("$i");
+                                        }
+
                                         return Column(
                                           children: [
                                             Row(
@@ -111,15 +120,13 @@ class RequestPage extends StatelessWidget {
                                                 Expanded(
                                                     child: customDropDown(
                                                         "Year",
-                                                        myCubit
-                                                            .categoryDropItems,
-                                                        context)),
+                                                        years,
+                                                        context , "year")),
                                                 Expanded(
                                                     child: customDropDown(
                                                         "Month",
-                                                        myCubit
-                                                            .categoryDropItems,
-                                                        context)),
+                                                        months,
+                                                        context , "month")),
                                               ],
                                             ),
                                             Row(
@@ -130,13 +137,13 @@ class RequestPage extends StatelessWidget {
                                                 Expanded(
                                                     child: customDropDown(
                                                         "Size",
-                                                        myCubit.genderDropItems,
-                                                        context)),
+                                                        myCubit.filtersData!.size,
+                                                        context , "size")),
                                                 Expanded(
                                                     child: customDropDown(
                                                         "Breed",
-                                                        myCubit.genderDropItems,
-                                                        context)),
+                                                        myCubit.filtersData!.breed,
+                                                        context , "breed")),
                                               ],
                                             ),
                                             Row(
@@ -147,14 +154,14 @@ class RequestPage extends StatelessWidget {
                                                 Expanded(
                                                     child: customDropDown(
                                                         "Gender",
-                                                        myCubit.genderDropItems,
-                                                        context)),
+                                                        ["Male" , "Female"],
+                                                        context , "gender")),
                                                 Expanded(
                                                     child: customDropDown(
                                                         "Breed",
                                                         myCubit
-                                                            .categoryDropItems,
-                                                        context)),
+                                                            .filtersData!.breed,
+                                                        context,"breed")),
                                               ],
                                             ),
                                             Row(
@@ -164,14 +171,14 @@ class RequestPage extends StatelessWidget {
                                               children: [
                                                 Expanded(
                                                     child: customDropDown(
-                                                        "Hair Lenght",
-                                                        myCubit.genderDropItems,
-                                                        context)),
+                                                        "Hair Length",
+                                                        myCubit.filtersData!.hairLength,
+                                                        context , "hairLength")),
                                                 Expanded(
                                                     child: customDropDown(
                                                         "Care & Behavior",
-                                                        myCubit.genderDropItems,
-                                                        context)),
+                                                        myCubit.filtersData!.behaviour,
+                                                        context , "careBehavior")),
                                               ],
                                             ),
                                             Row(
@@ -182,13 +189,13 @@ class RequestPage extends StatelessWidget {
                                                 Expanded(
                                                     child: customDropDown(
                                                         "House Trained",
-                                                        myCubit.genderDropItems,
-                                                        context)),
+                                                        ["True" , "False"],
+                                                        context , "houseTrained")),
                                                 Expanded(
                                                     child: customDropDown(
                                                         "Color",
-                                                        myCubit.genderDropItems,
-                                                        context)),
+                                                        myCubit.filtersData!.colors,
+                                                        context , "color")),
                                               ],
                                             ),
                                             Padding(
@@ -205,7 +212,7 @@ class RequestPage extends StatelessWidget {
                                               ),
                                             ),
                                             customTextField("Location",
-                                                loactionTextController,
+                                                locationTextController,
                                                 icon: Icon(Icons.location_on),
                                                 useIcon: true),
                                             customTextField("Phone number",
@@ -225,9 +232,10 @@ class RequestPage extends StatelessWidget {
                                                   Text(
                                                       "Vaccinated (up to date)"),
                                                   Checkbox(
-                                                      value: false,
-                                                      onChanged: (value) {})
-                                                  //Todo: check box
+                                                      value: RequestCubit.get(context).isVaccinated!,
+                                                      onChanged: (value) {
+                                                        RequestCubit.get(context).checkVaccine();
+                                                      })
                                                 ],
                                               ),
                                             ),
@@ -235,7 +243,12 @@ class RequestPage extends StatelessWidget {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: GestureDetector(
-                                                onTap: () {},
+                                                onTap: () {
+                                                  myCubit.postData(name: nameTextController.text.trim(),
+                                                      phone: phoneTextController.text.trim(),
+                                                      location: locationTextController.text.trim(),
+                                                      description: descriptionTextController.text.trim());
+                                                },
                                                 child: Container(
                                                     alignment: Alignment.center,
                                                     width: 400,
@@ -276,7 +289,8 @@ class RequestPage extends StatelessWidget {
     );
   }
 
-  Widget customDropDown(String hint, List<String> items, context) {
+  Widget customDropDown(String hint, List<String> items, context , String mapKey) {
+    String? dropDownValue ;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -286,20 +300,40 @@ class RequestPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: defaultDropDownMenu(
             onChanged: (String newValue) {
-              dropdownvalue = newValue;
+              dropDownValue = newValue;
+              switch(mapKey) {
+                case "categoryId":
+                  RequestCubit.get(context).selections[mapKey] = newValue == "Dog" ? 1 : 2;
+                  break;
+                case "gender":
+                  RequestCubit.get(context).selections[mapKey] = newValue != "Male" ;
+                  break;
+                case "houseTrained":
+                  RequestCubit.get(context).selections[mapKey] = newValue == "True";
+                  break;
+                case "year":
+                  RequestCubit.get(context).selections[mapKey] = int.parse(newValue);
+                  break;
+                case "month":
+                  RequestCubit.get(context).selections[mapKey] = int.parse(newValue);
+                  break;
+                default:
+                  RequestCubit.get(context).selections[mapKey] = dropDownValue;
+              }
+
               if (hint == "Category") {
-                hint = newValue;
+                dropDownValue = newValue;
                 if (newValue == "Dog") {
                   RequestCubit.get(context)..getDataByCategory("1");
                 } else {
                   RequestCubit.get(context)..getDataByCategory("2");
                 }
               } else {
-                hint = newValue;
+                dropDownValue = newValue;
               }
             },
             items: items,
-            selectedItem: dropdownvalue,
+            selectedItem: dropDownValue,
             borderRadius: BorderRadius.circular(20),
             backgroundColor: Colors.white,
             dropDownColor: Colors.white,

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petology_test/data/constant.dart';
 import 'package:petology_test/network/dio_helper.dart';
 import 'package:petology_test/pages/home.dart';
+import 'package:petology_test/pages/request.dart';
 
 import 'login_states.dart';
 
@@ -26,13 +27,14 @@ class LoginCubit extends Cubit<LoginStates> {
     )
         .then((value) {
       if (value.statusCode == 200) {
-        print("success\n"+'Token : ${(value.data['accessToken'])}');
         TOKEN =value.data['accessToken'];
+
+        print("success\n"+'Token : ${(TOKEN)}');
         emit(UserLoginSuccess());
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => Home()));
+                builder: (BuildContext context) => RequestPage()));
       } else {
         emit(UserLoginFailed());
         print("Error");

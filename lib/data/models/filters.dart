@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Filters {
-  List<String>? breed;
-  List<String>? ages;
-  List<String>? size;
-  List<String>? goodWith;
-  List<String>? gender;
-  List<String>? colors;
-  List<String>? hairLength;
-  List<String>? behaviour;
+  List<String> breed=["enter"];
+  List<String> ages=["enter"];
+  List<String> size=["enter"];
+  List<String> goodWith=["enter"];
+  List<String> gender=["enter"];
+  List<String> colors=["enter"];
+  List<String> hairLength=["enter"];
+  List<String> behaviour=["enter"];
 
   Filters(this.breed, this.ages, this.size, this.goodWith, this.gender,
       this.colors, this.hairLength, this.behaviour);

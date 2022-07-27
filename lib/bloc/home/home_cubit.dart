@@ -13,7 +13,8 @@ class HomeCubit extends Cubit<HomeStates> {
 
   static HomeCubit get(context) => BlocProvider.of(context);
   List<Profile> profiles = [];
-  List<PetsNeeds> listOfPets = [];
+  List<PetsNeeds> listOfData =[];
+
   Footer? footerData;
   FirstSection? firstSectionData;
   SecondSection? secondSectionData;
@@ -63,7 +64,6 @@ class HomeCubit extends Cubit<HomeStates> {
   }
 
   Future<dynamic> getHomePetsData(Context) async {
-    var listOfData;
     DioHelper.dio
         .get(
       PETS_NEED_ENDPOINT,
@@ -74,18 +74,16 @@ class HomeCubit extends Cubit<HomeStates> {
         .then((value) {
       if (value.statusCode == 200) {
         print("Success in pets api");
-        listOfData = PetsNeeds.fromJson(jsonDecode(value.data) as Map<String, dynamic>);
-
-
-        for (int i = 0; i < listOfData!.length; i++) {
-          listOfPets.add(
-              PetsNeeds(listOfData![i]["imageUrl"], listOfData![i]["title"]));
-          print("o");
+        for(int i = 0 ; i<value.data.length; i++){
+          listOfData.add(PetsNeeds.fromJson(value.data[i]));
         }
+        emit(petsNeedsSuccess());
 
 
       } else {
         print("Error in pets api");
+        emit(petsNeedsFaild());
+
       }
     });
   }

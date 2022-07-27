@@ -25,7 +25,7 @@ class Home extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
   List _isHovering = [false, false, false, false];
-  List pets = [];
+  List pets = [0, 1, 2, 3, 4, 5, 6, 7];
 
   CarouselController carouselController = CarouselController();
 
@@ -257,7 +257,9 @@ class HomePage extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: ConditionalBuilder(
-                condition: myCubit.firstSectionData != null &&myCubit.secondSectionData != null &&myCubit.footerData != null ,
+                condition: myCubit.firstSectionData != null &&
+                    myCubit.secondSectionData != null &&
+                    myCubit.footerData != null,
                 builder: (context) => Column(
                   children: [
                     Stack(
@@ -576,6 +578,9 @@ class HomePage extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     InkWell(
+                                      onTap: () {
+                                        carouselController.previousPage();
+                                      },
                                       child: Card(
                                         color: Colors.black,
                                         shape: RoundedRectangleBorder(
@@ -602,11 +607,13 @@ class HomePage extends StatelessWidget {
                                                 MainAxisAlignment.center,
                                             children:
                                                 [first, second, third].map((e) {
-                                              return petCard(e);
+                                              return e > pets.length - 1
+                                                  ? SizedBox()
+                                                  : petCard(pets[e]);
                                             }).toList(),
                                           );
                                         },
-                                        itemCount: 3,
+                                        itemCount: (pets.length / 3).ceil(),
                                         options: CarouselOptions(
                                           autoPlay: false,
                                           aspectRatio: 3,
@@ -615,6 +622,9 @@ class HomePage extends StatelessWidget {
                                       ),
                                     ),
                                     InkWell(
+                                      onTap: () {
+                                        carouselController.nextPage();
+                                      },
                                       child: Card(
                                         color: Colors.black,
                                         shape: RoundedRectangleBorder(
@@ -917,7 +927,7 @@ class HomePage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(30),
           border: Border.all(width: 2),
         ),
         height: 260,

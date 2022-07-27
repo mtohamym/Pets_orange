@@ -4,7 +4,7 @@ import 'package:petology_test/bloc/login/login_cubit.dart';
 import 'package:petology_test/bloc/login/login_states.dart';
 import 'package:petology_test/data/constant.dart';
 import 'package:petology_test/wedgits/footer.dart';
-import 'package:petology_test/wedgits/navBar.dart';
+import 'package:petology_test/wedgits/nav_bar.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);

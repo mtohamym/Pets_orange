@@ -4,7 +4,7 @@ import 'package:petology_test/bloc/sign_up/sign_up_cubit.dart';
 import 'package:petology_test/bloc/sign_up/sign_up_states.dart';
 import 'package:petology_test/data/constant.dart';
 import 'package:petology_test/wedgits/footer.dart';
-import 'package:petology_test/wedgits/navBar.dart';
+import 'package:petology_test/wedgits/nav_bar.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);

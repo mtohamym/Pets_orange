@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petology_test/wedgits/footer.dart';
-import 'package:petology_test/wedgits/navBar.dart';
+import 'package:petology_test/wedgits/nav_bar.dart';
 
 class HowToPage extends StatelessWidget {
   HowToPage({Key? key}) : super(key: key);

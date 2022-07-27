@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ms_widgets/ms_widgets.dart';
 import 'package:petology_test/wedgits/footer.dart';
-import 'package:petology_test/wedgits/navBar.dart';
+import 'package:petology_test/wedgits/nav_bar.dart';
 
 class HelpPage extends StatelessWidget {
   HelpPage({Key? key}) : super(key: key);
@@ -61,11 +62,11 @@ class HelpPage extends StatelessWidget {
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             Image.asset(
-                              "loginDog.png",
+                              "cam.png",
                               height: 300,
                               width: 300,
                             ),
-                            customDropDown("Category"),
+                            customDropDown("Category", ["Cat", "Dog"], context),
                             Padding(
                               padding: const EdgeInsets.only(
                                   left: 15.0, top: 20, bottom: 5),
@@ -187,7 +188,7 @@ class HelpPage extends StatelessWidget {
     );
   }
 
-  Widget customDropDown(String hint) {
+  Widget customDropDown(String hint, List<String> items, context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -195,22 +196,21 @@ class HelpPage extends StatelessWidget {
         elevation: 5,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: DropdownButton(
-            underline: SizedBox(),
-            hint: Text(
-              hint,
-              style: TextStyle(fontSize: 13),
-            ),
-            isExpanded: true,
-            onChanged: (String? newValue) {
+          child: defaultDropDownMenu(
+            onChanged: (String newValue) {
               dropdownvalue = newValue;
             },
-            items: items.map((items) {
-              return DropdownMenuItem(
-                value: items,
-                child: Text(items),
-              );
-            }).toList(),
+            items: items,
+            selectedItem: dropdownvalue,
+            borderRadius: BorderRadius.circular(20),
+            backgroundColor: Colors.white,
+            dropDownColor: Colors.white,
+            borderColor: Colors.transparent,
+            labelText: hint,
+            alignment: Alignment.center,
+            itemTextStyle: TextStyle(
+              color: Colors.black,
+            ),
           ),
         ),
       ),

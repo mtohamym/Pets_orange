@@ -6,10 +6,11 @@ import 'package:petology_test/bloc/request/request_cubit.dart';
 import 'package:petology_test/bloc/request/request_states.dart';
 import 'package:petology_test/data/models/home_model.dart';
 import 'package:petology_test/wedgits/footer.dart';
+import 'package:petology_test/wedgits/nav_bar.dart';
 
 class RequestPage extends StatelessWidget {
   RequestPage({Key? key}) : super(key: key);
-  String? dropdownvalue ;
+  String? dropdownvalue;
 
   TextEditingController nameTextController = TextEditingController();
   TextEditingController phoneTextController = TextEditingController();
@@ -18,7 +19,7 @@ class RequestPage extends StatelessWidget {
   TextEditingController descriptionTextController = TextEditingController();
 
   List _isHovering = [false, false, false, false];
-  List<String> items = ["item1","item2"];
+  List<String> items = ["item1", "item2"];
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +33,10 @@ class RequestPage extends StatelessWidget {
 
             return MaterialApp(
                 home: Scaffold(
-              appBar: navBar(screenSize),
               body: SingleChildScrollView(
                 child: Column(
                   children: [
+                    CustomNavBar(isTransparent: true),
                     SizedBox(
                       width: screenSize.width,
                       child: Stack(
@@ -79,7 +80,7 @@ class RequestPage extends StatelessWidget {
                                       },
                                       child: myCubit.base64string == null
                                           ? Image.asset(
-                                              "loginDog.png",
+                                              "cam.png",
                                               height: 300,
                                               width: 300,
                                             )
@@ -91,25 +92,9 @@ class RequestPage extends StatelessWidget {
                                     ),
                                     customTextField("Name", nameTextController),
                                     //TODO Dropdown
-                                    Container(
-                                      width: 300,
-                                      child: defaultDropDownMenu(
-                                        items: myCubit.categoryDropItems,
-                                        selectedItem: dropdownvalue,
-                                        borderRadius: BorderRadius.circular(20),
-                                        backgroundColor: Colors.white,
-                                        dropDownColor: Colors.white,
-                                        borderColor: Colors.transparent,
-                                        onChanged: (item){
-                                          dropdownvalue=item;
-                                        },
-                                        labelText: 'Category',
-                                        alignment: Alignment.center,
-                                        itemTextStyle: TextStyle(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
+
+                                    customDropDown("Category",
+                                        myCubit.categoryDropItems, context),
                                     ConditionalBuilder(
                                       condition: myCubit.filtersData != null,
                                       fallback: (BuildContext context) {
@@ -256,30 +241,6 @@ class RequestPage extends StatelessWidget {
                                                     width: 400,
                                                     height: 40,
                                                     decoration: BoxDecoration(
-                                                      color: Colors.brown,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                    ),
-                                                    child: Text(
-                                                      "Send",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.white),
-                                                    )),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: GestureDetector(
-                                                onTap: () {},
-                                                child: Container(
-                                                    alignment: Alignment.center,
-                                                    width: 400,
-                                                    height: 40,
-                                                    decoration: BoxDecoration(
                                                       color: Color(0xff492f24),
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -315,64 +276,44 @@ class RequestPage extends StatelessWidget {
     );
   }
 
-  Widget customDropDown(String hint,List<String> items, context) {
-
-    return Container(
-      width: 300,
-      height: 30,
-      child: defaultDropDownMenu(
-        items: items,
-        selectedItem: dropdownvalue,
-        borderRadius: BorderRadius.circular(20),
-        backgroundColor: Colors.white,
-        dropDownColor: Colors.white,
-        borderColor: Colors.transparent,
-        labelText: hint,
-        alignment: Alignment.center,
-        itemTextStyle: TextStyle(
-          color: Colors.black,
+  Widget customDropDown(String hint, List<String> items, context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: defaultDropDownMenu(
+            onChanged: (String newValue) {
+              dropdownvalue = newValue;
+              if (hint == "Category") {
+                hint = newValue;
+                if (newValue == "Dog") {
+                  RequestCubit.get(context)..getDataByCategory("1");
+                } else {
+                  RequestCubit.get(context)..getDataByCategory("2");
+                }
+              } else {
+                hint = newValue;
+              }
+            },
+            items: items,
+            selectedItem: dropdownvalue,
+            borderRadius: BorderRadius.circular(20),
+            backgroundColor: Colors.white,
+            dropDownColor: Colors.white,
+            borderColor: Colors.transparent,
+            labelText: hint,
+            alignment: Alignment.center,
+            itemTextStyle: TextStyle(
+              color: Colors.black,
+            ),
+          ),
         ),
       ),
     );
   }
-
-  // Widget customDropDown(String hint,List<String> items, context) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(8.0),
-  //     child: Card(
-  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-  //       elevation: 5,
-  //       child: Padding(
-  //         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-  //         child: DropdownButton(
-  //
-  //           value: items[0],
-  //           underline: SizedBox(),
-  //           hint: Text(
-  //             hint,
-  //             style: TextStyle(fontSize: 13),
-  //           ),
-  //           isExpanded: true,
-  //           onChanged: (String? newValue) {
-  //             dropdownvalue = newValue;
-  //             if (hint == "Category") {
-  //               hint = newValue!;
-  //               if (newValue == "Dog") {
-  //                 RequestCubit.get(context)..getDataByCategory("1");
-  //               } else {
-  //                 RequestCubit.get(context)..getDataByCategory("2");
-  //               }
-  //             }else {
-  //               hint = newValue!;
-  //             }
-  //
-  //           },
-  //           items: items!,
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget customTextField(String hint, TextEditingController controller,
       {Icon icon = const Icon(Icons.location_on), bool useIcon = false}) {
@@ -395,205 +336,6 @@ class RequestPage extends StatelessWidget {
               controller: controller,
             ),
           )),
-    );
-  }
-
-  PreferredSize navBar(Size screenSize) {
-    return PreferredSize(
-      preferredSize: Size(screenSize.width, 1000),
-      child: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color.fromRGBO(103, 71, 57, 1),
-            Color.fromRGBO(24, 7, 1, 1),
-          ],
-        )),
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: Row(
-            children: [
-              Image.asset(
-                "Logo.png",
-                height: 35,
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onHover: (value) {
-                        _isHovering[0] = value;
-                      },
-                      onTap: () {},
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'About us',
-                            style: TextStyle(
-                              color:
-                                  _isHovering[0] ? Colors.white : Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Visibility(
-                            maintainAnimation: true,
-                            maintainState: true,
-                            maintainSize: true,
-                            visible: _isHovering[0],
-                            child: Container(
-                              height: 2,
-                              width: 50,
-                              color: Color.fromRGBO(255, 227, 197, 1),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: screenSize.width / 20),
-                    InkWell(
-                      onHover: (value) {
-                        _isHovering[1] = value;
-                      },
-                      onTap: () {},
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Categories',
-                            style: TextStyle(
-                              color:
-                                  _isHovering[1] ? Colors.white : Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Visibility(
-                            maintainAnimation: true,
-                            maintainState: true,
-                            maintainSize: true,
-                            visible: _isHovering[1],
-                            child: Container(
-                              height: 2,
-                              width: 50,
-                              color: Color.fromRGBO(255, 227, 197, 1),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: screenSize.width / 20),
-                    InkWell(
-                      onHover: (value) {
-                        _isHovering[2] = value;
-                      },
-                      onTap: () {},
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Services',
-                            style: TextStyle(
-                              color:
-                                  _isHovering[2] ? Colors.white : Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Visibility(
-                            maintainAnimation: true,
-                            maintainState: true,
-                            maintainSize: true,
-                            visible: _isHovering[2],
-                            child: Container(
-                              height: 2,
-                              width: 50,
-                              color: Color.fromRGBO(255, 227, 197, 1),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: screenSize.width / 20),
-                    InkWell(
-                      onHover: (value) {
-                        _isHovering[3] = value;
-                      },
-                      onTap: () {},
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Request',
-                            style: TextStyle(
-                              color:
-                                  _isHovering[3] ? Colors.white : Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Visibility(
-                            maintainAnimation: true,
-                            maintainState: true,
-                            maintainSize: true,
-                            visible: _isHovering[3],
-                            child: Container(
-                              height: 2,
-                              width: 50,
-                              color: Color.fromRGBO(255, 227, 197, 1),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: screenSize.width / 5),
-                    Container(
-                      width: 100,
-                      height: 30,
-                      child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      decoration: BoxDecoration(
-                        color: Color.fromRGBO(225, 225, 225, 0.5),
-                        borderRadius: BorderRadius.circular(
-                          20.0,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: screenSize.width / 50,
-                    ),
-                    Container(
-                      width: 100,
-                      height: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Login",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      side: BorderSide(color: Colors.white))))),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

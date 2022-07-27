@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:petology_test/wedgits/footer.dart';
-import 'package:petology_test/wedgits/navBar.dart';
+import 'package:petology_test/wedgits/nav_bar.dart';
 
 class PetPage extends StatelessWidget {
   const PetPage({Key? key}) : super(key: key);

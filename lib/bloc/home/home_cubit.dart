@@ -13,7 +13,7 @@ class HomeCubit extends Cubit<HomeStates> {
 
   static HomeCubit get(context) => BlocProvider.of(context);
   List<Profile> profiles = [];
-  List<PetsNeeds> listOfData =[];
+  List<PetsNeeds> listOfData = [];
 
   Footer? footerData;
   FirstSection? firstSectionData;
@@ -57,8 +57,6 @@ class HomeCubit extends Cubit<HomeStates> {
             SecondSection(value.data['title'], value.data['body']);
       } else {
         print("error in second section");
-
-
       }
     });
   }
@@ -74,16 +72,13 @@ class HomeCubit extends Cubit<HomeStates> {
         .then((value) {
       if (value.statusCode == 200) {
         print("Success in pets api");
-        for(int i = 0 ; i<value.data.length; i++){
+        for (int i = 0; i < value.data.length; i++) {
           listOfData.add(PetsNeeds.fromJson(value.data[i]));
         }
         emit(petsNeedsSuccess());
-
-
       } else {
         print("Error in pets api");
         emit(petsNeedsFaild());
-
       }
     });
   }

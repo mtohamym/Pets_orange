@@ -84,11 +84,12 @@ class HomePage extends StatelessWidget {
                                     children: [
                                       SizedBox(
                                         width: 450,
-                                        height: 120,
                                         child: Text(
                                           myCubit.firstSectionData!
                                               .titleFirstSection,
                                           style: TextStyle(
+                                            wordSpacing: 2,
+                                            letterSpacing: 3,
                                             color: Colors.white,
                                             fontSize: 50,
                                             fontWeight: FontWeight.bold,
@@ -100,7 +101,6 @@ class HomePage extends StatelessWidget {
                                       ),
                                       SizedBox(
                                         width: 450,
-                                        height: 350,
                                         child: Text(
                                           myCubit.firstSectionData!
                                               .bodyFirstSection,
@@ -116,17 +116,32 @@ class HomePage extends StatelessWidget {
                                         height: 20,
                                       ),
                                       Card(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50)),
+                                        color: Colors.white,
                                         child: SizedBox(
-                                          width: 300,
-                                          height: 75,
-                                          child: Text(
-                                            myCubit.firstSectionData!
-                                                .bodyFirstSection,
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w100,
+                                          width: 450,
+                                          height: 60,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                SizedBox(),
+                                                Text(
+                                                  "Help them",
+                                                  textAlign: TextAlign.justify,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w100,
+                                                  ),
+                                                ),
+                                                Icon(Icons.arrow_forward_ios)
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -134,47 +149,55 @@ class HomePage extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(100, 0, 0, 0),
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        width: screenSize.width / 2,
-                                      ),
-                                      Stack(
-                                        alignment: Alignment.bottomCenter,
-                                        children: [
-                                          SizedBox(
-                                              width: 700,
-                                              height: 300,
-                                              child:
-                                                  Image.asset("whitepack.png")),
-                                          Positioned(
-                                            bottom: 75,
-                                            child: Container(
-                                              color: Colors.transparent,
-                                              height: 75,
-                                              width: 200,
-                                              child: Material(
+                                Expanded(
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(100, 0, 0, 0),
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          width: screenSize.width / 2,
+                                        ),
+                                        Stack(
+                                          alignment: Alignment.bottomCenter,
+                                          children: [
+                                            Positioned(
+                                              bottom: -20,
+                                              child: SizedBox(
+                                                  width: 700,
+                                                  height: 400,
+                                                  child: Image.asset(
+                                                      "whitepack.png")),
+                                            ),
+                                            Positioned(
+                                              bottom: 55,
+                                              child: Container(
                                                 color: Colors.transparent,
-                                                elevation: 10,
-                                                borderRadius:
-                                                    BorderRadius.circular(250),
+                                                height: 75,
+                                                width: 220,
+                                                child: Material(
+                                                  color: Colors.transparent,
+                                                  elevation: 10,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          220),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                0, 0, 0, 30),
-                                            child: SizedBox(
-                                                width: 500,
-                                                height: 500,
-                                                child: Image.asset("pop.png")),
-                                          ),
-                                        ],
-                                      )
-                                    ],
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      0, 0, 0, 30),
+                                              child: SizedBox(
+                                                  width: 500,
+                                                  height: 500,
+                                                  child:
+                                                      Image.asset("pop.png")),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],
@@ -183,7 +206,8 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    Container(
+                      color: Colors.grey[300],
                       height: 700,
                       child: Row(
                         children: [
@@ -202,11 +226,11 @@ class HomePage extends StatelessWidget {
                                           height: 300,
                                           child: Image.asset("whitepack.png")),
                                       Positioned(
-                                        bottom: 75,
+                                        bottom: 115,
                                         child: Container(
                                           color: Colors.transparent,
-                                          height: 75,
-                                          width: 200,
+                                          height: 70,
+                                          width: 175,
                                           child: Material(
                                             color: Colors.transparent,
                                             elevation: 10,
@@ -219,8 +243,8 @@ class HomePage extends StatelessWidget {
                                         padding: const EdgeInsets.fromLTRB(
                                             0, 0, 0, 50),
                                         child: SizedBox(
-                                            width: 500,
-                                            height: 500,
+                                            width: 600,
+                                            height: 600,
                                             child: Image.asset("dog.png")),
                                       ),
                                     ],
@@ -461,7 +485,7 @@ class HomePage extends StatelessWidget {
                     ),
                     Container(
                       color: Colors.white,
-                      height: 500,
+                      height: 650,
                       width: screenSize.width,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -487,6 +511,32 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                           SizedBox(height: 50),
+                          Container(
+                            height: 200,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 4,
+                              itemBuilder: (context, index) {
+                                return petsNeeds(
+                                    myCubit.petsNeedsData[index].title,
+                                    myCubit.petsNeedsData[index].imageUrl);
+                              },
+                            ),
+                          ),
+                          Container(
+                            height: 200,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 3,
+                              itemBuilder: (context, index) {
+                                return petsNeeds(
+                                    myCubit.petsNeedsData[index + 4].title,
+                                    myCubit.petsNeedsData[index + 4].imageUrl);
+                              },
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -537,43 +587,49 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget categoryCard(String categoryName, String imageName) {
-    return SizedBox(
-      height: 200,
-      width: 150,
-      child: Stack(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Image.asset("BrownCircle.png"),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0, bottom: 50),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset(
-                    imageName,
-                    width: 100,
-                    height: 100,
-                  ),
-                  Expanded(
-                    child: Text(
-                      categoryName,
-                      style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
+  Widget petsNeeds(String? name, String? url) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 75.0),
+      child: SizedBox(
+        height: 200,
+        width: 150,
+        child: Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Image.asset("BrownCircle.png"),
+              ],
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 50),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.network(
+                      url!,
+                      width: 100,
+                      height: 100,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Expanded(
+                      child: Text(
+                        name!,
+                        style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -9,7 +9,7 @@ import 'package:petology_test/wedgits/footer.dart';
 
 class RequestPage extends StatelessWidget {
   RequestPage({Key? key}) : super(key: key);
-  String? dropdownvalue = '';
+  String? dropdownvalue ;
 
   TextEditingController nameTextController = TextEditingController();
   TextEditingController phoneTextController = TextEditingController();
@@ -18,6 +18,7 @@ class RequestPage extends StatelessWidget {
   TextEditingController descriptionTextController = TextEditingController();
 
   List _isHovering = [false, false, false, false];
+  List<String> items = ["item1","item2"];
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +90,26 @@ class RequestPage extends StatelessWidget {
                                             ),
                                     ),
                                     customTextField("Name", nameTextController),
-                                    customDropDown("Category",
-                                        myCubit.categoryDropItems, context),
+                                    //TODO Dropdown
+                                    Container(
+                                      width: 300,
+                                      child: defaultDropDownMenu(
+                                        items: myCubit.categoryDropItems,
+                                        selectedItem: dropdownvalue,
+                                        borderRadius: BorderRadius.circular(20),
+                                        backgroundColor: Colors.white,
+                                        dropDownColor: Colors.white,
+                                        borderColor: Colors.transparent,
+                                        onChanged: (item){
+                                          dropdownvalue=item;
+                                        },
+                                        labelText: 'Category',
+                                        alignment: Alignment.center,
+                                        itemTextStyle: TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
                                     ConditionalBuilder(
                                       condition: myCubit.filtersData != null,
                                       fallback: (BuildContext context) {
@@ -295,65 +314,65 @@ class RequestPage extends StatelessWidget {
           }),
     );
   }
-  //
-  // Widget customDropDown(String hint,List<String> items, context) {
-  //   return Container(
-  //     width: 300,
-  //     height: 30,
-  //     child: defaultDropDownMenu(
-  //
-  //       items: items,
-  //       selectedItem: dropdownvalue,
-  //       borderRadius: BorderRadius.circular(20),
-  //       backgroundColor: Colors.white,
-  //       dropDownColor: Colors.white,
-  //       borderColor: Colors.transparent,
-  //       labelText: hint,
-  //       alignment: Alignment.center,
-  //       itemTextStyle: TextStyle(
-  //         color: Colors.black,
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget customDropDown(String hint,List<String> items, context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        elevation: 5,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: DropdownButton(
 
-            value: items[0],
-            underline: SizedBox(),
-            hint: Text(
-              hint,
-              style: TextStyle(fontSize: 13),
-            ),
-            isExpanded: true,
-            onChanged: (String? newValue) {
-              dropdownvalue = newValue;
-              if (hint == "Category") {
-                hint = newValue!;
-                if (newValue == "Dog") {
-                  RequestCubit.get(context)..getDataByCategory("1");
-                } else {
-                  RequestCubit.get(context)..getDataByCategory("2");
-                }
-              }else {
-                hint = newValue!;
-              }
-
-            },
-            items: items!,
-          ),
+    return Container(
+      width: 300,
+      height: 30,
+      child: defaultDropDownMenu(
+        items: items,
+        selectedItem: dropdownvalue,
+        borderRadius: BorderRadius.circular(20),
+        backgroundColor: Colors.white,
+        dropDownColor: Colors.white,
+        borderColor: Colors.transparent,
+        labelText: hint,
+        alignment: Alignment.center,
+        itemTextStyle: TextStyle(
+          color: Colors.black,
         ),
       ),
     );
   }
+
+  // Widget customDropDown(String hint,List<String> items, context) {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(8.0),
+  //     child: Card(
+  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+  //       elevation: 5,
+  //       child: Padding(
+  //         padding: const EdgeInsets.symmetric(horizontal: 15.0),
+  //         child: DropdownButton(
+  //
+  //           value: items[0],
+  //           underline: SizedBox(),
+  //           hint: Text(
+  //             hint,
+  //             style: TextStyle(fontSize: 13),
+  //           ),
+  //           isExpanded: true,
+  //           onChanged: (String? newValue) {
+  //             dropdownvalue = newValue;
+  //             if (hint == "Category") {
+  //               hint = newValue!;
+  //               if (newValue == "Dog") {
+  //                 RequestCubit.get(context)..getDataByCategory("1");
+  //               } else {
+  //                 RequestCubit.get(context)..getDataByCategory("2");
+  //               }
+  //             }else {
+  //               hint = newValue!;
+  //             }
+  //
+  //           },
+  //           items: items!,
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget customTextField(String hint, TextEditingController controller,
       {Icon icon = const Icon(Icons.location_on), bool useIcon = false}) {

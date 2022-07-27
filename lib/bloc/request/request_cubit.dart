@@ -50,7 +50,7 @@ class RequestCubit extends Cubit<RequestStates> {
     emit(SelectDropValue());
   }
 
-  List<String> categoryDropItems = ["Dog", "Cat"];
+  var categoryDropItems = ["Dog", "Cat"];
 
   // List<DropdownMenuItem<String>> categoryDropItems = [
   //   DropdownMenuItem(child: Text("Dog"), value: "1"),

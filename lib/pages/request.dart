@@ -35,7 +35,7 @@ class RequestPage extends StatelessWidget {
               body: SingleChildScrollView(
                 child: Column(
                   children: [
-                    CustomNavBar(isTransparent: true),
+                    CustomNavBar(isTransparent: false),
                     SizedBox(
                       width: screenSize.width,
                       child: Stack(

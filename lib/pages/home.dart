@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petology_test/bloc/home/home_cubit.dart';
 import 'package:petology_test/bloc/home/home_states.dart';
 import 'package:petology_test/data/models/pet.dart';
+import 'package:petology_test/pages/help_page.dart';
 import 'package:petology_test/wedgits/category_select.dart';
 import 'package:petology_test/wedgits/category_select_hover.dart';
 import 'package:petology_test/wedgits/footer.dart';
@@ -126,38 +127,46 @@ class HomePage extends StatelessWidget {
                                             SizedBox(
                                               height: 20,
                                             ),
-                                            Card(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50)),
-                                              color: Colors.white,
-                                              child: SizedBox(
-                                                width: 450,
-                                                height: 60,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      15.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      SizedBox(),
-                                                      Text(
-                                                        "Help them",
-                                                        textAlign:
-                                                            TextAlign.justify,
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w100,
+                                            InkWell(
+                                              onTap: (){
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext context) => HelpPage()));
+                                              },
+                                              child: Card(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50)),
+                                                color: Colors.white,
+                                                child: SizedBox(
+                                                  width: 450,
+                                                  height: 60,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(
+                                                        15.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        SizedBox(),
+                                                        Text(
+                                                          "Help them",
+                                                          textAlign:
+                                                              TextAlign.justify,
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.w100,
+                                                          ),
                                                         ),
-                                                      ),
-                                                      Icon(Icons
-                                                          .arrow_forward_ios)
-                                                    ],
+                                                        Icon(Icons
+                                                            .arrow_forward_ios)
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),

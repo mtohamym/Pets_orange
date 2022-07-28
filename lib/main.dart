@@ -13,5 +13,5 @@ import 'network/dio_helper.dart';
 
 void main() {
   DioHelper.init();
-  runApp(MaterialApp(home: Home()));
+  runApp(MaterialApp(home: LoginPage()));
 }

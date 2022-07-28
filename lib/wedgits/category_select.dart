@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petology_test/bloc/category_select/category_cubit.dart';
 import 'package:petology_test/bloc/category_select/category_states.dart';
 import 'package:petology_test/data/models/category.dart';
+import 'package:petology_test/pages/adaption.dart';
 import 'package:petology_test/wedgits/custom_radio.dart';
 
 class CategorySelect extends StatelessWidget {
@@ -60,11 +61,11 @@ class CategorySelect extends StatelessWidget {
                             height: 10,
                           ),
                         ),
-                        selectionCard(0, myCubit),
+                        selectionCard(1, myCubit,context),
                         const SizedBox(
                           width: 33,
                         ),
-                        selectionCard(1, myCubit),
+                        selectionCard(2, myCubit , context),
                       ],
                     ),
                   ),
@@ -73,10 +74,15 @@ class CategorySelect extends StatelessWidget {
             }));
   }
 
-  Widget selectionCard(int index, CategorySelectCubit myCubit) {
+  Widget selectionCard(int index, CategorySelectCubit myCubit , context) {
     return InkWell(
       splashColor: Colors.transparent,
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => AdaptionPage("$index")));
+      },
       onHover: (value) {
         myCubit.setHoverFor(index, value);
       },

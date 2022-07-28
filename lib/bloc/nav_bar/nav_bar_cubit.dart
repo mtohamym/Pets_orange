@@ -10,7 +10,8 @@ class NavBarCubit extends Cubit<NavBarStatus> {
 
   void setHoverFor(int index, bool value) {
     isHovering[index] = value;
-
     emit(UpdateSuccess());
   }
+
+
 }

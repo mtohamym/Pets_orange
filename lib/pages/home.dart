@@ -565,7 +565,7 @@ class HomePage extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           border: Border.all(width: 2),
         ),
-        height: 260,
+        height: 300,
         width: 200,
         child: Column(
           children: [

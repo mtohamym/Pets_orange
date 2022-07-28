@@ -4,8 +4,13 @@ import 'package:petology_test/bloc/nav_bar/nav_bar_cubit.dart';
 import 'package:petology_test/bloc/nav_bar/nav_bar_status.dart';
 
 class CustomNavBar extends StatelessWidget {
-  CustomNavBar({Key? key, required this.isTransparent}) : super(key: key);
+  CustomNavBar(
+      {Key? key,
+      required this.isTransparent,
+      required this.shoeCategorySelectHover})
+      : super(key: key);
 
+  Function shoeCategorySelectHover;
   bool isTransparent;
 
   @override
@@ -18,95 +23,99 @@ class CustomNavBar extends StatelessWidget {
             listener: (BuildContext context, state) {},
             builder: (BuildContext context, Object? state) {
               NavBarCubit myCubit = NavBarCubit.get(context);
-              return Container(
-                width: screenSize.width,
-                height: 70,
-                decoration: !isTransparent
-                    ? BoxDecoration(
-                        gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color.fromRGBO(103, 71, 57, 1),
-                          Color.fromRGBO(24, 7, 1, 1),
-                        ],
-                      ))
-                    : null,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 40.0,
-                      ),
-                      child: Image.asset(
-                        "Logo.png",
-                        height: 50,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+              return Stack(
+                children: [
+                  Container(
+                    width: screenSize.width,
+                    height: 70,
+                    decoration: !isTransparent
+                        ? BoxDecoration(
+                            gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color.fromRGBO(103, 71, 57, 1),
+                              Color.fromRGBO(24, 7, 1, 1),
+                            ],
+                          ))
+                        : null,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        navBarMenuitem(0, "About us", myCubit),
-                        SizedBox(width: screenSize.width / 20),
-                        navBarMenuitem(1, "Categories", myCubit),
-                        SizedBox(width: screenSize.width / 20),
-                        navBarMenuitem(2, "Services", myCubit),
-                        SizedBox(width: screenSize.width / 20),
-                        navBarMenuitem(3, "Request", myCubit),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 40.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 100,
-                            height: 30,
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(225, 225, 225, 0.5),
-                              borderRadius: BorderRadius.circular(
-                                20.0,
-                              ),
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 40.0,
                           ),
-                          SizedBox(
-                            width: screenSize.width / 50,
+                          child: Image.asset(
+                            "Logo.png",
+                            height: 50,
                           ),
-                          Container(
-                            width: 100,
-                            height: 30,
-                            child: TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Login",
-                                  style: TextStyle(
-                                    color: Colors.white,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            navBarMenuitem(0, "About us", myCubit),
+                            SizedBox(width: screenSize.width / 20),
+                            navBarMenuitem(1, "Categories", myCubit),
+                            SizedBox(width: screenSize.width / 20),
+                            navBarMenuitem(2, "Services", myCubit),
+                            SizedBox(width: screenSize.width / 20),
+                            navBarMenuitem(3, "Request", myCubit),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 40.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 100,
+                                height: 30,
+                                child: TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    "Sign Up",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20.0),
-                                            side: BorderSide(
-                                                color: Colors.white))))),
+                                decoration: BoxDecoration(
+                                  color: Color.fromRGBO(225, 225, 225, 0.5),
+                                  borderRadius: BorderRadius.circular(
+                                    20.0,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: screenSize.width / 50,
+                              ),
+                              Container(
+                                width: 100,
+                                height: 30,
+                                child: TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      "Login",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    style: ButtonStyle(
+                                        shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                                side: BorderSide(
+                                                    color: Colors.white))))),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
               );
             }));
   }
@@ -114,6 +123,11 @@ class CustomNavBar extends StatelessWidget {
   Widget navBarMenuitem(int index, String lable, NavBarCubit myCubit) {
     return InkWell(
       onHover: (value) {
+        if (index == 1 && value) {
+          shoeCategorySelectHover(value);
+          myCubit.setHoverFor(index, value);
+          return;
+        }
         myCubit.setHoverFor(index, value);
       },
       onTap: () {},
@@ -143,6 +157,3 @@ class CustomNavBar extends StatelessWidget {
     );
   }
 }
-/*
-
- */

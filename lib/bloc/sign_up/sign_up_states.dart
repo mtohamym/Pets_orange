@@ -1,4 +1,9 @@
-abstract class SignUpStates{}
-class SignUpInitialState extends SignUpStates{}
-class UserSigendUpSuccess extends SignUpStates{}
-class UserSigendUpFailed extends SignUpStates{}
+abstract class SignUpStates {}
+
+class SignUpInitialState extends SignUpStates {}
+
+class UserSigendUpSuccess extends SignUpStates {}
+
+class UserSigendUpFailed extends SignUpStates {}
+
+class ShowHover extends SignUpStates {}

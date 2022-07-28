@@ -13,3 +13,5 @@ class FilterSuccess extends AdaptionStates {}
 class FilterError extends AdaptionStates {}
 
 class LoadDataFaild extends AdaptionStates {}
+
+class ShowHover extends AdaptionStates {}

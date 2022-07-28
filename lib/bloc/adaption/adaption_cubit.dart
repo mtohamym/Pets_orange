@@ -17,6 +17,13 @@ class AdaptionCubit extends Cubit<AdaptionStates> {
   Filters? filtersData;
   List<Pet> listOfData = [];
   Map<String, dynamic> selections = {};
+  bool showHover = false;
+
+  void setShowHover(bool value) {
+    showHover = value;
+
+    emit(ShowHover());
+  }
 
   Future<dynamic> getFiltersByCategory(String id) async {
     DioHelper.dio

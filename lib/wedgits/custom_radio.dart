@@ -5,14 +5,20 @@ import '../data/models/category.dart';
 
 class CustomRadio extends StatelessWidget {
   Profile _profile;
+  Color _color;
 
-  CustomRadio(this._profile);
+  CustomRadio(this._profile, this._color);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color.fromRGBO(255, 227, 197, 1),
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      color: _color,
       child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(width: 1),
+            borderRadius: BorderRadius.circular(20)),
         height: 80,
         width: 80,
         alignment: Alignment.center,

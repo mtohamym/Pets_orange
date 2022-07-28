@@ -20,4 +20,4 @@ class ImageLoaded extends RequestStates {}
 
 class CheckBoxChanged extends RequestStates {}
 
-
+class ShowHover extends RequestStates {}

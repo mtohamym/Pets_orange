@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'dart:js';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ms_widgets/ms_widgets.dart';
 import 'package:petology_test/bloc/adaption/adaption_cubit.dart';
+import 'package:petology_test/wedgits/category_select_hover.dart';
 import 'package:petology_test/wedgits/footer.dart';
 import 'package:petology_test/wedgits/nav_bar.dart';
 
@@ -35,125 +37,140 @@ class AdaptionPage extends StatelessWidget {
             AdaptionCubit myCubit = AdaptionCubit.get(context);
 
             return Scaffold(
+              backgroundColor: Color.fromARGB(255, 250, 250, 250),
               body: SingleChildScrollView(
-                child: Column(
+                child: Stack(
                   children: [
-                    CustomNavBar(isTransparent: false),
-                    Stack(
-                      children: [
-                        Positioned(
-                          left: 100,
-                          top: 200,
-                          child: Image.asset("doghand.png"),
-                          width: 250,
-                          height: 250,
-                        ),
-                        Positioned(
-                            right: 100,
-                            top: 350,
-                            child: Image.asset("doghand.png"),
-                            width: 250,
-                            height: 250),
-                        Positioned(
-                            top: 500,
-                            child: Image.asset("doghand.png"),
-                            width: 250,
-                            height: 250),
-                        Positioned(
-                            bottom: 50,
-                            left: 100,
-                            child: Image.asset("doghand.png"),
-                            width: 250,
-                            height: 250),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    filterSection(
-                                        "Breed", screenSize.width / 7),
-                                    filterSection("Age", screenSize.width / 7),
-                                    filterSection("Size", screenSize.width / 7),
-                                    filterSection(
-                                        "Good With", screenSize.width / 7)
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    filterSection(
-                                        "Gender", screenSize.width / 7),
-                                    filterSection(
-                                        "Color", screenSize.width / 7),
-                                    filterSection(
-                                        "Hair Lenght", screenSize.width / 7),
-                                    filterSection(
-                                        "Care & Behavior", screenSize.width / 7)
-                                  ],
-                                ),
-                              ),
-                              Column(
+                    GestureDetector(
+                      onTap: () {
+                        myCubit.setShowHover(false);
+                      },
+                      child: Container(
+                        width: screenSize.width,
+                        color: Colors.transparent,
+                        child: Column(
+                          children: [
+                            CustomNavBar(
+                                isTransparent: false,
+                                shoeCategorySelectHover: (value) {
+                                  myCubit.setShowHover(value);
+                                }),
+                            Container(
+                              child: Stack(
                                 children: [
-                                  Container(
-                                    height: 450,
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: myCubit.listOfData.length >= 3
-                                          ? 3
-                                          : myCubit.listOfData.length,
-                                      itemBuilder: (context, index) {
-                                        return petCard(
-                                            myCubit.listOfData[index]);
-                                      },
-                                    ),
+                                  Positioned(
+                                      top: 50,
+                                      right: 250,
+                                      child: Image.asset("doghand.png"),
+                                      width: 250,
+                                      height: 250),
+                                  Positioned(
+                                    left: 100,
+                                    top: 100,
+                                    child: Image.asset("doghand.png"),
+                                    width: 250,
+                                    height: 250,
                                   ),
-                                  Container(
-                                    height: myCubit.listOfData.length - 3 > 0
-                                        ? 450
-                                        : 0,
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount:
-                                          myCubit.listOfData.length - 3 > 0
-                                              ? myCubit.listOfData.length - 3
-                                              : 0,
-                                      itemBuilder: (context, index) {
-                                        return petCard(
-                                            myCubit.listOfData[index]);
-                                      },
+                                  Positioned(
+                                      right: 100,
+                                      top: 200,
+                                      child: Image.asset("doghand.png"),
+                                      width: 250,
+                                      height: 250),
+                                  Positioned(
+                                      bottom: 50,
+                                      child: Image.asset("doghand.png"),
+                                      width: 250,
+                                      height: 250),
+                                  Positioned(
+                                      bottom: 50,
+                                      right: 250,
+                                      child: Image.asset("doghand.png"),
+                                      width: 250,
+                                      height: 250),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              filterSection("Breed",
+                                                  screenSize.width / 7),
+                                              filterSection(
+                                                  "Age", screenSize.width / 7),
+                                              filterSection(
+                                                  "Size", screenSize.width / 7),
+                                              filterSection("Good With",
+                                                  screenSize.width / 7)
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              filterSection("Gender",
+                                                  screenSize.width / 7),
+                                              filterSection("Color",
+                                                  screenSize.width / 7),
+                                              filterSection("Hair Lenght",
+                                                  screenSize.width / 7),
+                                              filterSection("Care & Behavior",
+                                                  screenSize.width / 7)
+                                            ],
+                                          ),
+                                        ),
+                                        Column(
+                                          children: [
+                                            Container(
+                                              height: 450,
+                                              child: GridView.builder(
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 3),
+                                                shrinkWrap: true,
+                                                itemCount:
+                                                    myCubit.listOfData.length,
+                                                itemBuilder: (context, index) {
+                                                  return petCard(myCubit
+                                                      .listOfData[index]);
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: InkWell(
+                                            child: Text(
+                                              "Show More...",
+                                              style: TextStyle(
+                                                  color: Color(0xff492f24),
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: InkWell(
-                                  child: Text(
-                                    "Show More...",
-                                    style: TextStyle(
-                                        color: Color(0xff492f24),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                            CustomFooter()
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                    CustomFooter()
+                    myCubit.showHover
+                        ? Center(child: CategorySelectHover())
+                        : SizedBox(),
                   ],
                 ),
               ),
@@ -172,8 +189,10 @@ class AdaptionPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SizedBox(
-            child: Image.memory(Base64Decoder()
-                .convert(pet.image![0].toString().substring(22))),
+            child: pet.image!.isNotEmpty
+                ? Image.memory(Base64Decoder()
+                    .convert(pet.image![0].toString().substring(22)))
+                : Image.asset("Logo.png"),
             height: 200,
           ),
           Text(
@@ -219,14 +238,15 @@ class AdaptionPage extends StatelessWidget {
               name,
               style: TextStyle(fontSize: 18),
             ),
-            customDropDown(["1", "2"], context, "mapKey" , categoryId)
+            customDropDown(["1", "2"], context, "mapKey", categoryId)
           ],
         ),
       ),
     );
   }
 
-  Widget customDropDown(List<String> items, context, String mapKey, String categoryId) {
+  Widget customDropDown(
+      List<String> items, context, String mapKey, String categoryId) {
     String? dropDownValue;
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -240,9 +260,6 @@ class AdaptionPage extends StatelessWidget {
               dropDownValue = newValue;
               AdaptionCubit.get(context).selections[mapKey] = "newValue";
               AdaptionCubit.get(context)..getPetsData(categoryId);
-
-
-
             },
             items: items,
             selectedItem: dropDownValue,

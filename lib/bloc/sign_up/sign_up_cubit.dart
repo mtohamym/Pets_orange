@@ -13,11 +13,18 @@ import 'package:petology_test/pages/home.dart';
 class SignUpCubit extends Cubit<SignUpStates> {
   SignUpCubit() : super(SignUpInitialState());
   static SignUpCubit get(context) => BlocProvider.of(context);
+  bool showHover = false;
 
+  void setShowHover(bool value) {
+    showHover = value;
 
-  Future<dynamic> registerUser(json ,String endpoint, context) async {
+    emit(ShowHover());
+  }
+
+  Future<dynamic> registerUser(json, String endpoint, context) async {
     DioHelper.dio
-        .post(endpoint,
+        .post(
+      endpoint,
       options: Options(headers: {
         HttpHeaders.contentTypeHeader: "application/json",
       }),
@@ -28,15 +35,11 @@ class SignUpCubit extends Cubit<SignUpStates> {
         print("success");
         print('Token : ${(value.data['accessToken'])}');
         emit(UserSigendUpSuccess());
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => Home()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) => Home()));
       } else {
         print("Error");
       }
     });
   }
-
-
 }

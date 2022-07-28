@@ -6,6 +6,7 @@ import 'package:petology_test/bloc/home/home_states.dart';
 import 'package:petology_test/data/constant.dart';
 import 'package:petology_test/data/models/category.dart';
 import 'package:petology_test/data/models/home_model.dart';
+import 'package:petology_test/data/models/pet.dart';
 import 'package:petology_test/network/dio_helper.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
@@ -17,6 +18,15 @@ class HomeCubit extends Cubit<HomeStates> {
 
   FirstSection? firstSectionData;
   SecondSection? secondSectionData;
+  bool showHover = false;
+
+  List<Pet> pets = [];
+
+  void setShowHover(bool value) {
+    showHover = value;
+
+    emit(ShowHover());
+  }
 
   Future<dynamic> getHomeFirstSectionsData(Context) async {
     DioHelper.dio
@@ -78,6 +88,55 @@ class HomeCubit extends Cubit<HomeStates> {
       } else {
         print("Error in pets api");
         emit(petsNeedsFaild());
+      }
+    });
+  }
+
+  Future<dynamic> getDogsData() async {
+    DioHelper.dio
+        .get(
+      GET_PETS_ENDPOINT + "1/pets",
+      options: Options(headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+        'Authorization': 'Bearer $TOKEN'
+      }),
+    )
+        .then((value) {
+      if (value.statusCode == 200) {
+        print("DogsCategorySuccess");
+        for (int i = 0; i < value.data.length; i++) {
+          pets.add(Pet.fromJson(value.data[i]));
+        }
+        emit(dogsLoadedSuccess());
+      } else {
+        print("DogsCategoryFailed");
+
+        emit(dogsLoadedFaild());
+      }
+    });
+  }
+
+  Future<dynamic> getCatsData() async {
+    DioHelper.dio
+        .get(
+      GET_PETS_ENDPOINT + "2/pets",
+      options: Options(headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+        'Authorization': 'Bearer $TOKEN'
+      }),
+    )
+        .then((value) {
+      if (value.statusCode == 200) {
+        print("CatsCategorySuccess");
+        for (int i = 0; i < value.data.length; i++) {
+          pets.add(Pet.fromJson(value.data[i]));
+        }
+        pets.shuffle();
+        emit(catsLoadedSuccess());
+      } else {
+        print("CatsCategoryFailed");
+
+        emit(catsLoadedFaild());
       }
     });
   }

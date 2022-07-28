@@ -18,7 +18,15 @@ class LoginCubit extends Cubit<LoginStates> {
 
   static LoginCubit get(context) => BlocProvider.of(context);
 
-  Future<dynamic> loginUser(json, String endpoint,context) async {
+  bool showHover = false;
+
+  void setShowHover(bool value) {
+    showHover = value;
+
+    emit(ShowHover());
+  }
+
+  Future<dynamic> loginUser(json, String endpoint, context) async {
     Response response = DioHelper.dio
         .post(
       endpoint,
@@ -29,9 +37,9 @@ class LoginCubit extends Cubit<LoginStates> {
     )
         .then((value) {
       if (value.statusCode == 200) {
-        TOKEN =value.data['accessToken'];
+        TOKEN = value.data['accessToken'];
 
-        print("success\n"+'Token : ${(TOKEN)}');
+        print("success\n" + 'Token : ${(TOKEN)}');
         emit(UserLoginSuccess());
         Navigator.push(
             context,

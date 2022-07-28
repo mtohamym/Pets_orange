@@ -61,11 +61,11 @@ class CategorySelect extends StatelessWidget {
                             height: 10,
                           ),
                         ),
-                        selectionCard(1, myCubit,context),
+                        selectionCard(0, myCubit,context),
                         const SizedBox(
                           width: 33,
                         ),
-                        selectionCard(2, myCubit , context),
+                        selectionCard(1, myCubit , context),
                       ],
                     ),
                   ),
@@ -81,7 +81,7 @@ class CategorySelect extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => AdaptionPage("$index")));
+                builder: (BuildContext context) => AdaptionPage("${index+1}")));
       },
       onHover: (value) {
         myCubit.setHoverFor(index, value);

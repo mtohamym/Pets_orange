@@ -11,6 +11,7 @@ import 'package:petology_test/bloc/request/request_states.dart';
 import 'package:petology_test/data/constant.dart';
 import 'package:petology_test/data/models/filters.dart';
 import 'package:petology_test/network/dio_helper.dart';
+import 'package:petology_test/pages/home.dart';
 
 class RequestCubit extends Cubit<RequestStates> {
   RequestCubit() : super(RequestInitialState());
@@ -71,6 +72,7 @@ class RequestCubit extends Cubit<RequestStates> {
       if (value.statusCode == 200) {
         print("RequestCategorySuccess");
         filtersData = Filters.fromJson(value.data);
+
         emit(RequestCategorySuccess());
       } else {
         print("RequestCategoryFailed");
@@ -94,7 +96,7 @@ class RequestCubit extends Cubit<RequestStates> {
       {required String name,
       required String phone,
       required String location,
-      required String description}) async {
+      required String description , required context}) async {
     selections['name'] = name;
     selections['phone'] = phone;
     selections['location'] = location;
@@ -118,7 +120,10 @@ class RequestCubit extends Cubit<RequestStates> {
         .then((value) {
       if (value.statusCode == 200) {
         print("Request Success");
-
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => Home()));
         emit(RequestPetSuccess());
       } else {
         print("Request Failed");

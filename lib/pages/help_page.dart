@@ -133,7 +133,7 @@ class HelpPage extends StatelessWidget {
                                                             .text
                                                             .trim(),
                                                         phoneTextController.text
-                                                            .trim());
+                                                            .trim() , context);
                                                   },
                                                   child: Card(
                                                     color: Color(0xff492f24),

@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ms_widgets/ms_widgets.dart';
 import 'package:petology_test/bloc/adaption/adaption_cubit.dart';
+import 'package:petology_test/pages/pet_page.dart';
 import 'package:petology_test/wedgits/category_select_hover.dart';
 import 'package:petology_test/wedgits/footer.dart';
 import 'package:petology_test/wedgits/nav_bar.dart';
@@ -139,7 +140,7 @@ class AdaptionPage extends StatelessWidget {
                                                     myCubit.listOfData.length,
                                                 itemBuilder: (context, index) {
                                                   return petCard(myCubit
-                                                      .listOfData[index]);
+                                                      .listOfData[index],context);
                                                 },
                                               ),
                                             ),
@@ -179,7 +180,7 @@ class AdaptionPage extends StatelessWidget {
     );
   }
 
-  Widget petCard(Pet pet) {
+  Widget petCard(Pet pet , context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
       width: 300,
@@ -201,7 +202,12 @@ class AdaptionPage extends StatelessWidget {
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.brown),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => PetPage(petId: pet.id!)));
+            },
             child: Container(
               alignment: Alignment.center,
               width: 150,

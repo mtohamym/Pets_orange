@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petology_test/bloc/nav_bar/nav_bar_cubit.dart';
 import 'package:petology_test/bloc/nav_bar/nav_bar_status.dart';
-import 'package:petology_test/pages/login.dart';
 import 'package:petology_test/pages/request.dart';
 import 'package:petology_test/pages/signup.dart';
+
+import '../pages/login.dart';
 
 class CustomNavBar extends StatelessWidget {
   CustomNavBar(
@@ -57,18 +58,13 @@ class CustomNavBar extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            navBarMenuitem(0, "About us", myCubit , (){}),
+                            navBarMenuitem(0, "About us", myCubit , context),
+                            SizedBox(width: screenSize.width / 20,),
+                            navBarMenuitem(1, "Categories", myCubit,context),
                             SizedBox(width: screenSize.width / 20),
-                            navBarMenuitem(1, "Categories", myCubit , (){}),
+                            navBarMenuitem(2, "Services", myCubit,context),
                             SizedBox(width: screenSize.width / 20),
-                            navBarMenuitem(2, "Services", myCubit , (){}),
-                            SizedBox(width: screenSize.width / 20),
-                            navBarMenuitem(3, "Request", myCubit , (){
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) => RequestPage()));
-                            }),
+                            navBarMenuitem(3, "Request", myCubit,context),
                           ],
                         ),
                         Padding(
@@ -138,7 +134,7 @@ class CustomNavBar extends StatelessWidget {
             }));
   }
 
-  Widget navBarMenuitem(int index, String lable, NavBarCubit myCubit , Function tap) {
+  Widget navBarMenuitem(int index, String lable, NavBarCubit myCubit , context) {
     return InkWell(
       onHover: (value) {
         if (index == 1 && value) {
@@ -148,7 +144,14 @@ class CustomNavBar extends StatelessWidget {
         }
         myCubit.setHoverFor(index, value);
       },
-      onTap: tap(),
+      onTap: (){
+        if(index==3){
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => RequestPage()));
+        }
+      },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -3,9 +3,12 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker_web/image_picker_web.dart';
 import 'package:petology_test/bloc/help_friend/help_states.dart';
+import 'package:petology_test/pages/home.dart';
 
 import '../../data/constant.dart';
 import '../../network/dio_helper.dart';
@@ -40,7 +43,7 @@ class HelpCubit extends Cubit<HelpStates> {
     emit(ImageLoaded());
   }
 
-  Future<dynamic> postData(String location, String phone) async {
+  Future<dynamic> postData(String location, String phone,  context) async {
     print(TOKEN);
     data['imageBase64'] = base64string;
     data['location'] = location;
@@ -61,7 +64,10 @@ class HelpCubit extends Cubit<HelpStates> {
         .then((value) {
       if (value.statusCode == 200) {
         print("Request Success");
-
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => Home()));
         emit(HelpSendSuccess());
       } else {
         print("Request Failed");
